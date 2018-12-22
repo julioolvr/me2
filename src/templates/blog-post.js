@@ -1,6 +1,6 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-
+import { graphql } from 'gatsby';
 
 export default function Template({
   data,
@@ -10,7 +10,7 @@ export default function Template({
 
   return (
     <div className="blog-post-container">
-      <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
+      <Helmet title={`${post.frontmatter.title} | Julio`} />
       <div className="blog-post">
         <h1>{post.frontmatter.title}</h1>
         <div
