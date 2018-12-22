@@ -46,9 +46,10 @@ exports.createPages = ({ actions, graphql }) => {
     groupedFiles.forEach(files => {
       files.forEach(file => {
         createPage({
-          path: file.frontmatter.path,
+          path: `/b${file.frontmatter.path}`,
           component: blogPostTemplate,
           context: {
+            postPath: file.frontmatter.path,
             otherLangs: files.filter(otherFile => file !== otherFile)
           }
         });
