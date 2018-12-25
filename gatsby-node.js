@@ -4,7 +4,8 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 const path = require("path");
-const R = require('ramda');
+
+const { postPath } = require('./src/utils/blog');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -34,25 +35,15 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors)
     }
 
-    // TODO: Better Ramda
-    const sorter = R.sortWith([
-      R.descend(R.prop('date')),
-      R.ascend(R.prop('key'))
-    ]);
-
-    const files = R.sort(sorter, result.data.allMarkdownRemark.edges.map(({ node }) => node));
-    const groupedFiles = R.groupWith((a, b) => a.frontmatter.key === b.frontmatter.key, files);
-
-    groupedFiles.forEach(files => {
-      files.forEach(file => {
-        createPage({
-          path: `/b${file.frontmatter.path}`,
-          component: blogPostTemplate,
-          context: {
-            postPath: file.frontmatter.path,
-            otherLangs: files.filter(otherFile => file !== otherFile)
-          }
-        });
+    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      createPage({
+        path: postPath(node),
+        component: blogPostTemplate,
+        context: {
+          postPath: node.frontmatter.path,
+          lang: node.frontmatter.lang,
+          key: node.frontmatter.key
+        }
       });
     });
   });
