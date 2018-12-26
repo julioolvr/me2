@@ -2,7 +2,7 @@
 title: Lazy JS method evaluation
 tags: javascript
 
-date: "2013-02-17"
+date: "2018-02-17"
 path: "/2013/02/17/lazy-js-method-evaluation"
 key: lazy-js-method-evaluation
 lang: es
