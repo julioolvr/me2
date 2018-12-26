@@ -1,13 +1,11 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 
-import { postPath } from '../../src/utils/blog';
+import { postPath } from '../utils/blog';
 
-export default function Template({
-  data,
-  pageContext
-}) {
+export default function Template({ data }) {
   const { post, otherLangs } = data;
 
   // I don't know more than two languages :)
@@ -21,14 +19,18 @@ export default function Template({
 
         {otherPost && <Link to={postPath(otherPost)}>{otherPost.frontmatter.lang}</Link>}
 
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
+        <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
     </div>
-  )
+  );
 }
+
+Template.propTypes = {
+  data: PropTypes.shape({
+    post: PropTypes.object.isRequired,
+    otherLangs: PropTypes.object,
+  }).isRequired,
+};
 
 export const pageQuery = graphql`
   query BlogPostByPath($postPath: String!, $lang: String!, $key: String!) {
@@ -41,7 +43,9 @@ export const pageQuery = graphql`
       }
     }
 
-    otherLangs: allMarkdownRemark(filter: { frontmatter: { key: { eq: $key }, lang: { ne: $lang } } }) {
+    otherLangs: allMarkdownRemark(
+      filter: { frontmatter: { key: { eq: $key }, lang: { ne: $lang } } }
+    ) {
       edges {
         node {
           frontmatter {
