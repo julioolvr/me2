@@ -33,10 +33,13 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      const fullPostPath = postPath(node.frontmatter.path, node.frontmatter.lang);
+
       createPage({
-        path: postPath(node),
+        path: fullPostPath,
         component: blogPostTemplate,
         context: {
+          path: fullPostPath,
           postPath: node.frontmatter.path,
           lang: node.frontmatter.lang,
           key: node.frontmatter.key,

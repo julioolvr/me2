@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
+import { postPath } from '../utils/blog';
 import Layout from '../components/layout';
+import './b.css';
 
 function Blog({ data }) {
   const posts = data.posts.group
@@ -16,12 +18,17 @@ function Blog({ data }) {
     });
 
   return (
-    <Layout>
-      <ol>
+    <Layout centered>
+      <ol className="posts-list">
         {posts.map(postGroup => (
-          <li>
-            {postGroup[0].node.frontmatter.date}
-            {postGroup[0].node.frontmatter.title}
+          <li key={postGroup[0].node.frontmatter.path}>
+            <time>{postGroup[0].node.frontmatter.date}</time>
+
+            <Link
+              to={postPath(postGroup[0].node.frontmatter.path, postGroup[0].node.frontmatter.lang)}
+            >
+              {postGroup[0].node.frontmatter.title}
+            </Link>
           </li>
         ))}
       </ol>
@@ -44,6 +51,8 @@ export const query = graphql`
             frontmatter {
               title
               date
+              lang
+              path
             }
           }
         }

@@ -17,7 +17,11 @@ export default function Template({ data }) {
       <div className="blog-post">
         <h1>{post.frontmatter.title}</h1>
 
-        {otherPost && <Link to={postPath(otherPost)}>{otherPost.frontmatter.lang}</Link>}
+        {otherPost && (
+          <Link to={postPath(otherPost.frontmatter.path, otherPost.frontmatter.lang)}>
+            {otherPost.frontmatter.lang}
+          </Link>
+        )}
 
         <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
