@@ -39,7 +39,6 @@ exports.createPages = ({ actions, graphql }) => {
         path: fullPostPath,
         component: blogPostTemplate,
         context: {
-          path: fullPostPath,
           postPath: node.frontmatter.path,
           lang: node.frontmatter.lang,
           key: node.frontmatter.key,
