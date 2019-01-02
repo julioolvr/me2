@@ -1,0 +1,14 @@
+.index-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+.index-list > li {
+  padding: 0 10px;
+}
+
+.index-list > li + li {
+  border-left: 1px solid black;
+}

@@ -1,35 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link, graphql } from 'gatsby';
+import { Link } from 'gatsby';
 
 import Layout from '../components/layout';
+import './index.css';
 
-const IndexPage = ({ data }) => (
-  <Layout>
-    <h1>
-      Hi people
-      {data.site.siteMetadata.title}
-    </h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
+const IndexPage = () => (
+  <Layout centered>
+    <ul className="index-list">
+      <li>
+        <Link to="/b">me</Link>
+      </li>
+      <li>
+        <Link to="/b">blog</Link>
+      </li>
+      <li>
+        <Link to="/b">talks</Link>
+      </li>
+      <li>
+        <Link to="/b">things</Link>
+      </li>
+    </ul>
   </Layout>
 );
-
-export const query = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`;
-
-IndexPage.propTypes = {
-  data: PropTypes.shape({
-    site: PropTypes.object.isRequired,
-  }).isRequired,
-};
 
 export default IndexPage;
