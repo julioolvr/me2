@@ -4,10 +4,6 @@
   padding: 0;
 }
 
-.posts-list li + li {
-  margin-top: 0.5em;
-}
-
 .posts-list time {
   font-size: 0.8em;
   color: #888;
