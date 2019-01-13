@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { Link, graphql } from 'gatsby';
+import styled from 'styled-components';
 
+import Layout from '../components/layout';
 import { postPath } from '../utils/blog';
+
+const Post = styled.article`
+  max-width: 40em;
+  padding: 1.5em;
+  margin: 0 auto;
+`;
 
 export default function Template({ data }) {
   const { post, otherLangs } = data;
@@ -12,9 +20,9 @@ export default function Template({ data }) {
   const otherPost = otherLangs && otherLangs.edges.map(edge => edge.node)[0];
 
   return (
-    <div className="blog-post-container">
+    <Layout>
       <Helmet title={`${post.frontmatter.title} | Julio`} />
-      <div className="blog-post">
+      <Post>
         <h1>{post.frontmatter.title}</h1>
 
         {otherPost && (
@@ -23,9 +31,9 @@ export default function Template({ data }) {
           </Link>
         )}
 
-        <div className="blog-post-content" dangerouslySetInnerHTML={{ __html: post.html }} />
-      </div>
-    </div>
+        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      </Post>
+    </Layout>
   );
 }
 
