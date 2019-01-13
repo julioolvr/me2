@@ -2,11 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import styled, { createGlobalStyle, css } from 'styled-components';
 
-// TODO: Use a CSS-in-JS solution
-// TODO: Use a typography lib for font sizes
 // TODO: Define a theme with color variables
-import './layout.css';
+
+const Content = styled.div`
+  ${props => props.centered
+    && css`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    `}
+`;
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #fafafa;
+  }
+`;
 
 const Layout = ({ centered, children }) => (
   <StaticQuery
@@ -24,8 +39,9 @@ const Layout = ({ centered, children }) => (
         <Helmet title={data.site.siteMetadata.title}>
           <html lang="en" />
         </Helmet>
+        <GlobalStyle />
 
-        <div className={centered ? 'layout-centered' : ''}>{children}</div>
+        <Content centered={centered}>{children}</Content>
       </>
     )}
   />
