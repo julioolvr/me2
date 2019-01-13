@@ -1,10 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
+import styled from 'styled-components';
 
 import { postPath } from '../utils/blog';
 import Layout from '../components/layout';
-import './b.css';
+
+const PostsList = styled.ol`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const Time = styled.time`
+  font-size: 0.8em;
+  color: #888; // TODO: Theme?
+  margin-right: 1em;
+`;
 
 function Blog({ data }) {
   const posts = data.posts.group
@@ -19,10 +31,10 @@ function Blog({ data }) {
 
   return (
     <Layout centered>
-      <ol className="posts-list">
+      <PostsList>
         {posts.map(postGroup => (
           <li key={postGroup[0].node.frontmatter.path}>
-            <time>{postGroup[0].node.frontmatter.date}</time>
+            <Time>{postGroup[0].node.frontmatter.date}</Time>
 
             <Link
               to={postPath(postGroup[0].node.frontmatter.path, postGroup[0].node.frontmatter.lang)}
@@ -31,7 +43,7 @@ function Blog({ data }) {
             </Link>
           </li>
         ))}
-      </ol>
+      </PostsList>
     </Layout>
   );
 }

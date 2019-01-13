@@ -1,25 +1,40 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import styled from 'styled-components';
 
 import Layout from '../components/layout';
-import './index.css';
+
+const MainPage = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+`;
+
+const Pages = styled.li`
+  padding: 0 10px;
+
+  & + & {
+    border-left: 1px solid black;
+  }
+`;
 
 const IndexPage = () => (
   <Layout centered>
-    <ul className="index-list">
-      <li>
+    <MainPage>
+      <Pages>
         <Link to="/b">me</Link>
-      </li>
-      <li>
+      </Pages>
+      <Pages>
         <Link to="/b">blog</Link>
-      </li>
-      <li>
+      </Pages>
+      <Pages>
         <Link to="/talks">talks</Link>
-      </li>
-      <li>
+      </Pages>
+      <Pages>
         <Link to="/b">things</Link>
-      </li>
-    </ul>
+      </Pages>
+    </MainPage>
   </Layout>
 );
 
