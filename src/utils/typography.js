@@ -3,8 +3,8 @@ import theme from 'typography-theme-fairy-gates';
 
 const typography = new Typography({
   ...theme,
-  baseFontSize: '20px',
-  // TODO: more spacing?
+  baseFontSize: '22px',
+  baseLineHeight: 1.7,
 });
 
 export default typography;
