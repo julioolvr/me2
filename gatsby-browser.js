@@ -5,3 +5,6 @@
  */
 
 require('prismjs/themes/prism-coy.css');
+require('firacode/distr/fira_code.css');
+
+require('./src/styles/global.css');
