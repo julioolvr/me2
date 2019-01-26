@@ -31,32 +31,34 @@ exports.onCreateNode = ({ node, actions }) => {
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
-  if (!page.path.startsWith('/b/2')) {
-    return Promise.resolve();
-  }
-
-  if (page.context.key) {
-    return Promise.resolve();
-  }
-
   return new Promise((resolve) => {
-    const oldPage = Object.assign({}, page);
-    const newPage = Object.assign({}, page);
-    newPage.context = Object.assign({}, page.context);
+    if (!page.path.startsWith('/b/2')) {
+      return resolve();
+    }
+
+    if (page.context.key) {
+      return resolve();
+    }
+
+    deletePage(page);
+
+    const newPage = { ...page };
 
     // Extract date, language and key from the original path
-    const [, date, key, lang] = page.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)\.(\w{2})/);
+    const [, date, key, lang] = newPage.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)\.(\w{2})/);
 
-    newPage.context.date = date;
-    newPage.context.key = key;
-    newPage.context.lang = lang;
+    newPage.context = {
+      ...page.context,
+      date,
+      key,
+      lang,
+    };
 
     // Add the lang as a subpath (so /en instead of .en)
-    newPage.path = oldPage.path.replace(`.${lang}`, `/${lang}`);
+    newPage.path = newPage.path.replace(`.${lang}`, `/${lang}`);
 
-    deletePage(oldPage);
     createPage(newPage);
 
-    resolve();
+    return resolve();
   });
 };
