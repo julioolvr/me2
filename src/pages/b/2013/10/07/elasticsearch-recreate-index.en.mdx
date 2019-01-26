@@ -1,11 +1,19 @@
 ---
 title: Recreate ElasticSearch index for integration testing.
 tags: elasticsearch, tire, ruby, rails
-date: "2013-10-07"
-path: /2013/10/07/elasticsearch-recreate-index-tests
-key: elasticsearch-recreate-index-tests
-lang: en
 ---
+
+import { graphql } from 'gatsby'
+import Template from 'src/templates/blog-post'
+import { query as postFragment } from 'src/fragments/post-fragment'
+
+export default Template
+
+export const query = graphql`
+  query ElasticsearchRecreateIndexEn($key: String!) {
+    ...OtherPostsFragment
+  }
+`
 
 I fought against this for most of last week so now that I solved it I figured I could share it with the rest of the world (not that I had much fun running tons of Jenkins' builds to see if it was fixed...).
 

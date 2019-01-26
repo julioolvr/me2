@@ -1,3 +1,5 @@
+const remarkHighlight = require('remark-highlight.js');
+
 module.exports = {
   siteMetadata: {
     title: 'Julito',
@@ -7,8 +9,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'files',
-        path: `${__dirname}/src`,
+        name: 'posts',
+        path: `${__dirname}/src/pages/b`,
       },
     },
     'gatsby-transformer-sharp',
@@ -26,22 +28,22 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          {
-            resolve: 'gatsby-remark-prismjs',
-          },
-        ],
-      },
-    },
-    {
       resolve: 'gatsby-plugin-typography',
       options: {
         pathToConfigModule: 'src/utils/typography',
       },
     },
     'gatsby-plugin-styled-components',
+    {
+      resolve: 'gatsby-mdx',
+      options: {
+        mdPlugins: [remarkHighlight],
+        defaultLayouts: {
+          default: require.resolve('./src/templates/blog-post'),
+        },
+      },
+    },
+    'gatsby-plugin-root-import',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

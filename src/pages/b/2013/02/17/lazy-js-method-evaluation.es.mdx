@@ -1,12 +1,19 @@
 ---
 title: Lazy JS method evaluation
 tags: javascript
-
-date: '2013-02-17'
-path: '/2013/02/17/lazy-js-method-evaluation'
-key: lazy-js-method-evaluation
-lang: es
 ---
+
+import { graphql } from 'gatsby'
+import Template from 'src/templates/blog-post'
+import { query as postFragment } from 'src/fragments/post-fragment'
+
+export default Template
+
+export const query = graphql`
+  query LazyJsMethodEvaluation($key: String!) {
+    ...OtherPostsFragment
+  }
+`
 
 El otro día, mirando contra mi voluntad el código de [CKEditor](https://github.com/ckeditor/ckeditor-dev), me encontré con un patrón para evaluación lazy de los métodos de un objeto JS bastante canchero (y probablemente conocido).
 

@@ -4,6 +4,8 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, css } from 'styled-components';
 
+import 'highlight.js/styles/arduino-light.css';
+
 // TODO: Define a theme with color variables
 
 const Content = styled.div`

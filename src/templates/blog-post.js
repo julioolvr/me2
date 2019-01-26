@@ -1,72 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
-import { Link, graphql } from 'gatsby';
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 import Layout from '../components/layout';
-import { postPath } from '../utils/blog';
 
 const Post = styled.article`
-  max-width: 40em;
+  max-width: 35em;
   padding: 1.5em;
   margin: 0 auto;
 `;
 
-export default function Template({ data }) {
-  const { post, otherLangs } = data;
-
+export default function Template({ data, pageContext, children }) {
   // I don't know more than two languages :)
-  const otherPost = otherLangs && otherLangs.edges.map(edge => edge.node)[0];
+  const otherPostNode = data.posts.edges.filter(
+    ({ node }) => node.context.lang !== pageContext.lang,
+  )[0];
+  const otherPost = otherPostNode && otherPostNode.node;
 
   return (
     <Layout>
-      <Helmet title={`${post.frontmatter.title} | Julio`} />
       <Post>
-        <h1>{post.frontmatter.title}</h1>
+        <h1>WIP</h1>
 
-        {otherPost && (
-          <Link to={postPath(otherPost.frontmatter.path, otherPost.frontmatter.lang)}>
-            {otherPost.frontmatter.lang}
-          </Link>
-        )}
+        {otherPost && <Link to={otherPost.path}>{otherPost.context.lang}</Link>}
 
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        {children}
       </Post>
     </Layout>
   );
 }
 
 Template.propTypes = {
+  children: PropTypes.node.isRequired,
+  pageContext: PropTypes.shape({ lang: PropTypes.string.isRequired }).isRequired,
   data: PropTypes.shape({
-    post: PropTypes.object.isRequired,
-    otherLangs: PropTypes.object,
+    posts: PropTypes.shape({ edges: PropTypes.arrayOf(PropTypes.object) }),
   }).isRequired,
 };
-
-export const pageQuery = graphql`
-  query BlogPostByPath($postPath: String!, $lang: String!, $key: String!) {
-    post: markdownRemark(frontmatter: { path: { eq: $postPath }, lang: { eq: $lang } }) {
-      html
-      frontmatter {
-        date(formatString: "MMMM DD, YYYY")
-        path
-        title
-      }
-    }
-
-    otherLangs: allMarkdownRemark(
-      filter: { frontmatter: { key: { eq: $key }, lang: { ne: $lang } } }
-    ) {
-      edges {
-        node {
-          frontmatter {
-            title
-            path
-            lang
-          }
-        }
-      }
-    }
-  }
-`;

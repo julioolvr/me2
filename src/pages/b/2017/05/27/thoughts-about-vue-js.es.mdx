@@ -1,11 +1,19 @@
 ---
 title: Thoughts about Vue.js
 tags: javascript, vue
-date: "2017-05-27"
-path: /2017/05/27/thoughts-about-vue-js
-key: thoughts-about-vue-js
-lang: es
 ---
+
+import { graphql } from 'gatsby'
+import Template from 'src/templates/blog-post'
+import { query as postFragment } from 'src/fragments/post-fragment'
+
+export default Template
+
+export const query = graphql`
+  query ThoughtAboutVueJsEs($key: String!) {
+    ...OtherPostsFragment
+  }
+`
 
 Hace poco fui a un workshop de Vue.js que dio [@ianaya89](https://twitter.com/ianaya89), organizado por la gente de [@workshopsjs](https://twitter.com/workshopsjs). En este post voy a tratar de recopilar lo que saqué del mismo.
 

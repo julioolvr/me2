@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
+import { groupWith } from 'ramda';
 
-import { postPath } from '../utils/blog';
 import Layout from '../components/layout';
 
 const PostsList = styled.ol`
@@ -19,28 +19,16 @@ const Time = styled.time`
 `;
 
 function Blog({ data }) {
-  const posts = data.posts.group
-    .map(group => group.edges)
-    .sort((a, b) => {
-      if (a[0].node.frontmatter.date > b[0].node.frontmatter.date) {
-        return -1;
-      }
-
-      return 1;
-    });
+  const posts = groupWith((a, b) => a.node.context.key === b.node.context.key, data.posts.edges);
 
   return (
     <Layout centered>
       <PostsList>
         {posts.map(postGroup => (
-          <li key={postGroup[0].node.frontmatter.path}>
-            <Time>{postGroup[0].node.frontmatter.date}</Time>
+          <li key={postGroup[0].node.path}>
+            <Time>{postGroup[0].node.context.date}</Time>
 
-            <Link
-              to={postPath(postGroup[0].node.frontmatter.path, postGroup[0].node.frontmatter.lang)}
-            >
-              {postGroup[0].node.frontmatter.title}
-            </Link>
+            <Link to={postGroup[0].node.path}>{postGroup[0].node.context.frontmatter.title}</Link>
           </li>
         ))}
       </PostsList>
@@ -56,15 +44,19 @@ export default Blog;
 
 export const query = graphql`
   query {
-    posts: allMarkdownRemark {
-      group(field: frontmatter___key) {
-        edges {
-          node {
+    posts: allSitePage(
+      filter: { path: { regex: "/^/b/2/" } }
+      sort: { order: DESC, fields: context___date }
+    ) {
+      edges {
+        node {
+          path
+          context {
+            key
+            lang
+            date
             frontmatter {
               title
-              date
-              lang
-              path
             }
           }
         }

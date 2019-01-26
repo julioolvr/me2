@@ -3,49 +3,60 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
+
 const path = require('path');
 
-const { postPath } = require('./src/utils/blog');
+exports.onCreateNode = ({ node, actions }) => {
+  if (node.internal.type !== 'Mdx') return;
 
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions;
-  const blogPostTemplate = path.resolve('src/templates/blog-post.js');
+  const { createNodeField } = actions;
 
-  // TODO: Check limit
-  return graphql(`
-    {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000) {
-        edges {
-          node {
-            frontmatter {
-              date
-              path
-              key
-              lang
-            }
-          }
-        }
-      }
-    }
-  `).then((result) => {
-    if (result.errors) {
-      return Promise.reject(result.errors);
-    }
+  // Extract key from path
+  const fileName = path.basename(node.fileAbsolutePath, 'mdx');
+  const [key, lang] = fileName.split('.');
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      const fullPostPath = postPath(node.frontmatter.path, node.frontmatter.lang);
+  createNodeField({
+    node,
+    name: 'key',
+    value: key,
+  });
 
-      createPage({
-        path: fullPostPath,
-        component: blogPostTemplate,
-        context: {
-          postPath: node.frontmatter.path,
-          lang: node.frontmatter.lang,
-          key: node.frontmatter.key,
-        },
-      });
-    });
+  createNodeField({
+    node,
+    name: 'lang',
+    value: lang,
+  });
+};
 
-    return result;
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions;
+
+  if (!page.path.startsWith('/b/2')) {
+    return Promise.resolve();
+  }
+
+  if (page.context.key) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const oldPage = Object.assign({}, page);
+    const newPage = Object.assign({}, page);
+    newPage.context = Object.assign({}, page.context);
+
+    // Extract date, language and key from the original path
+    const [, date, key, lang] = page.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)\.(\w{2})/);
+
+    newPage.context.date = date;
+    newPage.context.key = key;
+    newPage.context.lang = lang;
+
+    // Add the lang as a subpath (so /en instead of .en)
+    newPage.path = oldPage.path.replace(`.${lang}`, `/${lang}`);
+
+    deletePage(oldPage);
+    createPage(newPage);
+
+    resolve();
   });
 };
