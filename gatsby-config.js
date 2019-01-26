@@ -37,6 +37,14 @@ module.exports = {
     {
       resolve: 'gatsby-mdx',
       options: {
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 704,
+            },
+          },
+        ],
         mdPlugins: [remarkHighlight],
         defaultLayouts: {
           default: require.resolve('./src/templates/blog-post'),

@@ -16,3 +16,7 @@ pre[class*='language-'] {
 code {
   color: #5800a2;
 }
+
+.gatsby-resp-image-link {
+  background-image: none;
+}
