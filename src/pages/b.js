@@ -13,6 +13,9 @@ const PostsList = styled.ol`
 `;
 
 const Time = styled.time`
+  min-width: 100px;
+  display: inline-block;
+  text-align: right;
   font-size: 0.8em;
   color: #888; // TODO: Theme?
   margin-right: 1em;
