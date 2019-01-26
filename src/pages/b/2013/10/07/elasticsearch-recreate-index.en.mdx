@@ -1,5 +1,5 @@
 ---
-title: Recreate ElasticSearch index for integration testing.
+title: Recreate ElasticSearch index for integration testing
 tags: elasticsearch, tire, ruby, rails
 ---
 

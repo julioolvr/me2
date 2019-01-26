@@ -21,7 +21,7 @@ export default function Template({ data, pageContext, children }) {
   return (
     <Layout>
       <Post>
-        <h1>WIP</h1>
+        <h1>{pageContext.frontmatter.title}</h1>
 
         {otherPost && <Link to={otherPost.path}>{otherPost.context.lang}</Link>}
 
