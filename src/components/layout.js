@@ -17,6 +17,13 @@ const Content = styled.div`
       height: 100vh;
       width: 100vw;
     `}
+
+  ${props => props.horizontallyCentered
+    && css`
+      display: flex;
+      justify-content: center;
+      height: 100vh;
+    `}
 `;
 
 const GlobalStyle = createGlobalStyle`
@@ -25,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout = ({ centered, children }) => (
+const Layout = ({ centered, horizontallyCentered, children }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -43,7 +50,9 @@ const Layout = ({ centered, children }) => (
         </Helmet>
         <GlobalStyle />
 
-        <Content centered={centered}>{children}</Content>
+        <Content centered={centered} horizontallyCentered={horizontallyCentered}>
+          {children}
+        </Content>
       </>
     )}
   />
@@ -51,11 +60,13 @@ const Layout = ({ centered, children }) => (
 
 Layout.propTypes = {
   centered: PropTypes.bool,
+  horizontallyCentered: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Layout.defaultProps = {
   centered: false,
+  horizontallyCentered: false,
 };
 
 export default Layout;
