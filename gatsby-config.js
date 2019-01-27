@@ -10,7 +10,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'posts',
-        path: `${__dirname}/src/pages/b`,
+        path: `${__dirname}/src/pages`,
       },
     },
     'gatsby-transformer-sharp',
@@ -42,6 +42,7 @@ module.exports = {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 704,
+              backgroundColor: '#fafafa',
             },
           },
         ],

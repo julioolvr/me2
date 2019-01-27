@@ -32,7 +32,7 @@ const IndexPage = () => (
         <Link to="/talks">talks</Link>
       </Pages>
       <Pages>
-        <Link to="/b">things</Link>
+        <Link to="/things">things</Link>
       </Pages>
       <Pages>
         <a href="https://github.com/julioolvr">github</a>
