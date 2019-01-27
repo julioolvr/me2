@@ -34,6 +34,12 @@ const IndexPage = () => (
       <Pages>
         <Link to="/b">things</Link>
       </Pages>
+      <Pages>
+        <a href="https://github.com/julioolvr">github</a>
+      </Pages>
+      <Pages>
+        <a href="https://twitter.com/julioolvr">twitter</a>
+      </Pages>
     </MainPage>
   </Layout>
 );
