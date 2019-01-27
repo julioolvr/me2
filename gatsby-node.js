@@ -8,6 +8,7 @@ const path = require('path');
 
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type !== 'Mdx') return;
+  if (!node.fileAbsolutePath.replace(__dirname, '').startsWith('/src/pages/b')) return;
 
   const { createNodeField } = actions;
 
@@ -32,7 +33,7 @@ exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
   return new Promise((resolve) => {
-    if (!page.path.startsWith('/b/2')) {
+    if (!page.path.match(/^(?:\/\w\w)?\/b\/\d/)) {
       return resolve();
     }
 
@@ -54,8 +55,10 @@ exports.onCreatePage = ({ page, actions }) => {
       lang,
     };
 
-    // Add the lang as a subpath (so /en instead of .en)
-    newPage.path = newPage.path.replace(`.${lang}`, `/${lang}`);
+    // Add the lang as the first part of the path for `es`,
+    // `en` will be the default.
+    const prefix = lang === 'en' ? '' : `/${lang}`;
+    newPage.path = prefix.concat(newPage.path.replace(`.${lang}`, ''));
 
     createPage(newPage);
 

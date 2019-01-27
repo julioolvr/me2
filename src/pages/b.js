@@ -22,6 +22,7 @@ const Time = styled.time`
 `;
 
 function Blog({ data }) {
+  console.log('Blog.data', data);
   const posts = groupWith((a, b) => a.node.context.key === b.node.context.key, data.posts.edges);
 
   return (
@@ -48,7 +49,7 @@ export default Blog;
 export const query = graphql`
   query {
     posts: allSitePage(
-      filter: { path: { regex: "/^/b/2/" } }
+      filter: { path: { regex: "/^(?:/\\w\\w)?/b/\\d/" } }
       sort: { order: DESC, fields: context___date }
     ) {
       edges {
