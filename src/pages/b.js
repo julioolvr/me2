@@ -22,7 +22,6 @@ const Time = styled.time`
 `;
 
 function Blog({ data }) {
-  console.log('Blog.data', data);
   const posts = groupWith((a, b) => a.node.context.key === b.node.context.key, data.posts.edges);
 
   return (
