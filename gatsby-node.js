@@ -5,7 +5,12 @@
  */
 
 const path = require('path');
-const debug = require('debug')('me:gatsby-node');
+const createLogger = require('debug');
+
+const onCreateNodeLogger = createLogger('me:gatsby-node:onCreateNode');
+const addLangToPageLogger = createLogger('me:gatsby-node:addLangToPage');
+const addPostDataToContextLogger = createLogger('me:gatsby-node:addPostDataToContextLogger');
+const errorLogger = createLogger('me:gatsby-node:error');
 
 const DEFAULT_LANG = 'en';
 
@@ -18,6 +23,8 @@ exports.onCreateNode = ({ node, actions }) => {
   // Extract key from path
   const fileName = path.basename(node.fileAbsolutePath, 'mdx');
   const [key, lang] = fileName.split('.');
+
+  onCreateNodeLogger('Modifying node for %s', node.fileAbsolutePath);
 
   createNodeField({
     node,
@@ -40,12 +47,13 @@ function addLangToPage({ page, actions }) {
       return resolve();
     }
 
+    addLangToPageLogger('Deleting page %s', page.path);
     deletePage(page);
 
     const newPage = { ...page };
 
     // Extract lang from the path
-    const matches = newPage.path.match(/(\w{2})\/$/);
+    const matches = newPage.path.match(/\.(\w{2})\/$/);
     const lang = matches ? matches[1] : DEFAULT_LANG;
 
     // Add the lang as the first part of the path for `es`,
@@ -75,6 +83,7 @@ function addPostDataToContext({ page, actions }) {
       return resolve();
     }
 
+    addPostDataToContextLogger('Deleting page %s', page.path);
     deletePage(page);
 
     const newPage = { ...page };
@@ -95,6 +104,6 @@ function addPostDataToContext({ page, actions }) {
 }
 
 exports.onCreatePage = (...args) => Promise.all([
-  addLangToPage(...args).catch(error => debug('[addLangToPage error] %O', error)),
-  addPostDataToContext(...args).catch(error => debug('[addPostDataToContext error] %O', error)),
+  addLangToPage(...args).catch(error => errorLogger('[addLangToPage] %O', error)),
+  addPostDataToContext(...args).catch(error => errorLogger('[addPostDataToContext] %O', error)),
 ]);
