@@ -6,6 +6,8 @@
 
 const path = require('path');
 
+const DEFAULT_LANG = 'en';
+
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type !== 'Mdx') return;
   if (!node.fileAbsolutePath.replace(__dirname, '').startsWith('/src/pages/b')) return;
@@ -29,7 +31,38 @@ exports.onCreateNode = ({ node, actions }) => {
   });
 };
 
-exports.onCreatePage = ({ page, actions }) => {
+function addLangToPage({ page, actions }) {
+  const { createPage, deletePage } = actions;
+
+  return new Promise((resolve) => {
+    if (page.context.lang) {
+      return resolve();
+    }
+
+    deletePage(page);
+
+    const newPage = { ...page };
+
+    // Extract lang from the path
+    const matches = newPage.path.match(/(\w{2})\/$/);
+    const lang = matches ? matches[1] : DEFAULT_LANG;
+
+    // Add the lang as the first part of the path for `es`,
+    // `en` will be the default.
+    const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`;
+    newPage.path = prefix.concat(newPage.path.replace(`.${lang}`, ''));
+
+    newPage.context = {
+      ...page.context,
+      lang,
+    };
+
+    createPage(newPage);
+    return resolve();
+  });
+}
+
+function addPostDataToContext({ page, actions }) {
   const { createPage, deletePage } = actions;
 
   return new Promise((resolve) => {
@@ -45,23 +78,22 @@ exports.onCreatePage = ({ page, actions }) => {
 
     const newPage = { ...page };
 
-    // Extract date, language and key from the original path
-    const [, date, key, lang] = newPage.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)\.(\w{2})/);
+    // Extract date and key from the path
+    const [, date, key] = newPage.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)/);
 
     newPage.context = {
       ...page.context,
       date,
       key,
-      lang,
     };
-
-    // Add the lang as the first part of the path for `es`,
-    // `en` will be the default.
-    const prefix = lang === 'en' ? '' : `/${lang}`;
-    newPage.path = prefix.concat(newPage.path.replace(`.${lang}`, ''));
 
     createPage(newPage);
 
     return resolve();
   });
-};
+}
+
+exports.onCreatePage = (...args) => Promise.all([
+  addLangToPage(...args).catch(error => console.error('[addLangToPage error]', error)),
+  addPostDataToContext(...args).catch(error => console.error('[addPostDataToContext error]', error)),
+]);
