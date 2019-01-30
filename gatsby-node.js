@@ -5,6 +5,7 @@
  */
 
 const path = require('path');
+const debug = require('debug')('me:gatsby-node');
 
 const DEFAULT_LANG = 'en';
 
@@ -94,6 +95,6 @@ function addPostDataToContext({ page, actions }) {
 }
 
 exports.onCreatePage = (...args) => Promise.all([
-  addLangToPage(...args).catch(error => console.error('[addLangToPage error]', error)),
-  addPostDataToContext(...args).catch(error => console.error('[addPostDataToContext error]', error)),
+  addLangToPage(...args).catch(error => debug('[addLangToPage error] %O', error)),
+  addPostDataToContext(...args).catch(error => debug('[addPostDataToContext error] %O', error)),
 ]);
