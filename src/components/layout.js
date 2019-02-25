@@ -32,7 +32,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout = ({ centered, horizontallyCentered, children }) => (
+const Layout = ({
+  centered, horizontallyCentered, children, ...props
+}) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -50,7 +52,7 @@ const Layout = ({ centered, horizontallyCentered, children }) => (
         </Helmet>
         <GlobalStyle />
 
-        <Content centered={centered} horizontallyCentered={horizontallyCentered}>
+        <Content centered={centered} horizontallyCentered={horizontallyCentered} {...props}>
           {children}
         </Content>
       </>

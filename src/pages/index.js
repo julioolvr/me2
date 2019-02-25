@@ -23,7 +23,7 @@ const IndexPage = () => (
   <Layout centered>
     <MainPage>
       <Pages>
-        <Link to="/b">me</Link>
+        <Link to="/me">me</Link>
       </Pages>
       <Pages>
         <Link to="/b">blog</Link>
