@@ -1,46 +1,11 @@
 import React from 'react';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
 
-import Layout from '../components/layout';
-
-const MainPage = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-`;
-
-const Pages = styled.li`
-  padding: 0 10px;
-
-  & + & {
-    border-left: 1px solid black;
-  }
-`;
+import Layout from 'src/components/layout';
+import Sections from 'src/components/sections';
 
 const IndexPage = () => (
-  <Layout centered>
-    <MainPage>
-      <Pages>
-        <Link to="/me">me</Link>
-      </Pages>
-      <Pages>
-        <Link to="/b">blog</Link>
-      </Pages>
-      <Pages>
-        <Link to="/talks">talks</Link>
-      </Pages>
-      <Pages>
-        <Link to="/things">things</Link>
-      </Pages>
-      <Pages>
-        <a href="https://github.com/julioolvr">github</a>
-      </Pages>
-      <Pages>
-        <a href="https://twitter.com/julioolvr">twitter</a>
-      </Pages>
-    </MainPage>
+  <Layout centered withHeader={false}>
+    <Sections />
   </Layout>
 );
 

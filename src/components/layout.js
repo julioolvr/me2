@@ -6,19 +6,27 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 
 import 'highlight.js/styles/arduino-light.css';
 
+import Header from 'src/components/header';
+
 // TODO: Define a theme with color variables
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+`;
 
 const Content = styled.div`
   padding-top: 2em;
   padding-bottom: 2em;
+  flex: 1;
 
   ${props => props.centered
     && css`
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      min-width: 100vw;
     `}
 `;
 
@@ -28,7 +36,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout = ({ centered, children, ...props }) => (
+const Layout = ({
+  centered, children, withHeader, ...props
+}) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -44,11 +54,15 @@ const Layout = ({ centered, children, ...props }) => (
         <Helmet title={data.site.siteMetadata.title}>
           <html lang="en" />
         </Helmet>
+
         <GlobalStyle />
 
-        <Content centered={centered} {...props}>
-          {children}
-        </Content>
+        <Container>
+          {withHeader ? <Header /> : null}
+          <Content centered={centered} {...props}>
+            {children}
+          </Content>
+        </Container>
       </>
     )}
   />
@@ -57,10 +71,12 @@ const Layout = ({ centered, children, ...props }) => (
 Layout.propTypes = {
   centered: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  withHeader: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   centered: false,
+  withHeader: true,
 };
 
 export default Layout;
