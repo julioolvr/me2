@@ -9,20 +9,16 @@ import 'highlight.js/styles/arduino-light.css';
 // TODO: Define a theme with color variables
 
 const Content = styled.div`
+  padding-top: 2em;
+  padding-bottom: 2em;
+
   ${props => props.centered
     && css`
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      width: 100vw;
-    `}
-
-  ${props => props.horizontallyCentered
-    && css`
-      display: flex;
-      justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      min-width: 100vw;
     `}
 `;
 
@@ -32,9 +28,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout = ({
-  centered, horizontallyCentered, children, ...props
-}) => (
+const Layout = ({ centered, children, ...props }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -52,7 +46,7 @@ const Layout = ({
         </Helmet>
         <GlobalStyle />
 
-        <Content centered={centered} horizontallyCentered={horizontallyCentered} {...props}>
+        <Content centered={centered} {...props}>
           {children}
         </Content>
       </>
@@ -62,13 +56,11 @@ const Layout = ({
 
 Layout.propTypes = {
   centered: PropTypes.bool,
-  horizontallyCentered: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 
 Layout.defaultProps = {
   centered: false,
-  horizontallyCentered: false,
 };
 
 export default Layout;
