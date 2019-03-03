@@ -1,7 +1,7 @@
 code[class*='language-'],
 pre[class*='language-'] {
-  font-family: 'Fira Code', Arial, Consolas, Monaco, 'Andale Mono',
-    'Ubuntu Mono', monospace;
+  font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
+    monospace;
 
   background-color: #f1f1f1;
   border-left: 2px solid black;

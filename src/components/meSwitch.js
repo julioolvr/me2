@@ -9,6 +9,15 @@ const LangSwitcher = styled.div`
   width: 100%;
 `;
 
+const GreetingLink = styled(Link)`
+  text-decoration: none;
+  background-image: none;
+
+  h1 {
+    color: #1ca086;
+  }
+`;
+
 function MeSwitch({ lang }) {
   let englishGreeting = (
     <h1>
@@ -29,11 +38,11 @@ function MeSwitch({ lang }) {
   );
 
   if (lang === 'es') {
-    englishGreeting = <Link to="/me">{englishGreeting}</Link>;
+    englishGreeting = <GreetingLink to="/me">{englishGreeting}</GreetingLink>;
   }
 
   if (lang === 'en') {
-    spanishGreeting = <Link to="/es/me">{spanishGreeting}</Link>;
+    spanishGreeting = <GreetingLink to="/es/me">{spanishGreeting}</GreetingLink>;
   }
 
   return (
