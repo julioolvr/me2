@@ -7,6 +7,7 @@ import styled, { createGlobalStyle, css } from 'styled-components';
 import 'highlight.js/styles/arduino-light.css';
 
 import Header from 'src/components/header';
+import { LangProvider, WithLang } from 'src/components/languageToggle';
 
 // TODO: Define a theme with color variables
 
@@ -36,37 +37,39 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Layout = ({
+function Layout({
   centered, children, withHeader, ...props
-}) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
+}) {
+  return (
+    <StaticQuery
+      query={graphql`
+        query SiteTitleQuery {
+          site {
+            siteMetadata {
+              title
+            }
           }
         }
-      }
-    `}
-    render={data => (
-      <>
-        <Helmet title={data.site.siteMetadata.title}>
-          <html lang="en" />
-        </Helmet>
+      `}
+      render={data => (
+        <LangProvider>
+          <Helmet title={data.site.siteMetadata.title}>
+            <WithLang>{lang => <html lang={lang} />}</WithLang>
+          </Helmet>
 
-        <GlobalStyle />
+          <GlobalStyle />
 
-        <Container>
-          {withHeader ? <Header /> : null}
-          <Content centered={centered} {...props}>
-            {children}
-          </Content>
-        </Container>
-      </>
-    )}
-  />
-);
+          <Container>
+            {withHeader ? <Header /> : null}
+            <Content centered={centered} {...props}>
+              {children}
+            </Content>
+          </Container>
+        </LangProvider>
+      )}
+    />
+  );
+}
 
 Layout.propTypes = {
   centered: PropTypes.bool,

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
+
+import Link from 'src/components/link';
 
 const LangSwitcher = styled.div`
   display: flex;
@@ -38,11 +39,11 @@ function MeSwitch({ lang }) {
   );
 
   if (lang === 'es') {
-    englishGreeting = <GreetingLink to="/me">{englishGreeting}</GreetingLink>;
+    englishGreeting = <GreetingLink to="/me" lang="en">{englishGreeting}</GreetingLink>;
   }
 
   if (lang === 'en') {
-    spanishGreeting = <GreetingLink to="/es/me">{spanishGreeting}</GreetingLink>;
+    spanishGreeting = <GreetingLink to="/es/me" lang="es">{spanishGreeting}</GreetingLink>;
   }
 
   return (

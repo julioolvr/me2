@@ -6,7 +6,7 @@ import Sections from 'src/components/sections';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  padding: 20px 0;
   border-bottom: 1px solid #efefef;
   font-size: 0.8em;
 `;

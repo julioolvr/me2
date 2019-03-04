@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Layout from 'src/components/layout';
 import MeSwitch from 'src/components/meSwitch';
+import { WithLang } from 'src/components/languageToggle';
 
 const Container = styled.div`
   width: 25em;
@@ -16,20 +17,23 @@ const Content = styled.div`
   text-align: left;
 `;
 
-function MeLayout({ children, lang }) {
+function MeLayout({ children }) {
   return (
     <Layout centered width="25em">
-      <Container>
-        <MeSwitch lang={lang} />
-        <Content>{children}</Content>
-      </Container>
+      <WithLang>
+        {lang => (
+          <Container>
+            <MeSwitch lang={lang} />
+            <Content>{children}</Content>
+          </Container>
+        )}
+      </WithLang>
     </Layout>
   );
 }
 
 MeLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  lang: PropTypes.oneOf(['en', 'es']).isRequired,
 };
 
 export default MeLayout;

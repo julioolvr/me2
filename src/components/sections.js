@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
 
+import LinkWithLang from 'src/components/link';
+
 const Pages = styled.ul`
   margin: 0;
   padding: 0;
@@ -22,7 +24,7 @@ function Sections() {
   return (
     <Pages>
       <Page>
-        <Link to="/me">me</Link>
+        <LinkWithLang to="/me">me</LinkWithLang>
       </Page>
       <Page>
         <Link to="/b">blog</Link>

@@ -12,7 +12,7 @@ const List = styled.ul`
 
 function Me() {
   return (
-    <Layout lang="en">
+    <Layout>
       <List>
         <li>
           <span role="img" aria-label="Argentinian flag">

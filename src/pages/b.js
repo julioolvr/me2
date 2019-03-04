@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql, Link } from 'gatsby';
 import styled from 'styled-components';
-import { groupWith } from 'ramda';
+import {
+  groupWith, groupBy, compose, map, head, prop,
+} from 'ramda';
 
+import { WithLang } from 'src/components/languageToggle';
 import Layout from '../components/layout';
 
 const PostsList = styled.ol`
@@ -21,20 +24,38 @@ const Time = styled.time`
   margin-right: 1em;
 `;
 
+function bestPostForLang(lang) {
+  return (postGroup) => {
+    if (postGroup[lang]) {
+      return postGroup[lang];
+    }
+    return postGroup[Object.keys(postGroup)[0]];
+  };
+}
+
 function Blog({ data }) {
-  const posts = groupWith((a, b) => a.node.context.key === b.node.context.key, data.posts.edges);
+  const posts = compose(
+    map(map(head)),
+    map(groupBy(edge => edge.context.lang)),
+    groupWith((a, b) => a.context.key === b.context.key),
+    map(prop('node')),
+  )(data.posts.edges);
 
   return (
     <Layout centered>
-      <PostsList>
-        {posts.map(postGroup => (
-          <li key={postGroup[0].node.path}>
-            <Time>{postGroup[0].node.context.date}</Time>
+      <WithLang>
+        {lang => (
+          <PostsList>
+            {posts.map(bestPostForLang(lang)).map(post => (
+              <li key={post.path}>
+                <Time>{post.context.date}</Time>
 
-            <Link to={postGroup[0].node.path}>{postGroup[0].node.context.frontmatter.title}</Link>
-          </li>
-        ))}
-      </PostsList>
+                <Link to={post.path}>{post.context.frontmatter.title}</Link>
+              </li>
+            ))}
+          </PostsList>
+        )}
+      </WithLang>
     </Layout>
   );
 }

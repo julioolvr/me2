@@ -6,6 +6,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^0.16.6",
     "@mdx-js/tag": "^0.16.6",
+    "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.10.0",
     "debug": "^4.1.1",
     "firacode": "^1.205.0",
