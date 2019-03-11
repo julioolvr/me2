@@ -1,38 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import styled from 'styled-components';
 import {
   groupWith, groupBy, compose, map, head, prop,
 } from 'ramda';
 
 import { WithLang } from 'src/components/languageToggle';
-import Layout from '../components/layout';
+import MultiLangPost from 'src/components/multiLangPost';
+import Layout from 'src/components/layout';
 
 const PostsList = styled.ol`
   list-style: none;
   margin: 0;
   padding: 0;
 `;
-
-const Time = styled.time`
-  min-width: 100px;
-  display: inline-block;
-  text-align: right;
-  font-size: 0.8em;
-  color: #888; // TODO: Theme?
-  margin-right: 1em;
-`;
-
-function bestPostForLang(lang) {
-  return (postGroup) => {
-    if (postGroup[lang]) {
-      return postGroup[lang];
-    }
-
-    return postGroup[Object.keys(postGroup)[0]];
-  };
-}
 
 function Blog({ data }) {
   const posts = compose(
@@ -47,12 +29,8 @@ function Blog({ data }) {
       <WithLang>
         {lang => (
           <PostsList>
-            {posts.map(bestPostForLang(lang)).map(post => (
-              <li key={post.path}>
-                <Time>{post.context.date}</Time>
-
-                <Link to={post.path}>{post.context.frontmatter.title}</Link>
-              </li>
+            {posts.map(postGroup => (
+              <MultiLangPost postGroup={postGroup} lang={lang} />
             ))}
           </PostsList>
         )}

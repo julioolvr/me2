@@ -39,11 +39,19 @@ function MeSwitch({ lang }) {
   );
 
   if (lang === 'es') {
-    englishGreeting = <GreetingLink to="/me" lang="en">{englishGreeting}</GreetingLink>;
+    englishGreeting = (
+      <GreetingLink to="/me" lang="en">
+        {englishGreeting}
+      </GreetingLink>
+    );
   }
 
   if (lang === 'en') {
-    spanishGreeting = <GreetingLink to="/es/me" lang="es">{spanishGreeting}</GreetingLink>;
+    spanishGreeting = (
+      <GreetingLink to="/es/me" lang="es">
+        {spanishGreeting}
+      </GreetingLink>
+    );
   }
 
   return (

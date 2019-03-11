@@ -11,6 +11,10 @@ const Post = styled.article`
   margin: 0 auto;
 `;
 
+const OtherPost = styled.div`
+  font-size: 0.8em;
+`;
+
 export default function Template({ data, pageContext, children }) {
   // I don't know more than two languages :)
   const otherPostNode = data.posts.edges.filter(
@@ -18,12 +22,24 @@ export default function Template({ data, pageContext, children }) {
   )[0];
   const otherPost = otherPostNode && otherPostNode.node;
 
+  let otherPostText;
+
+  if (pageContext.lang === 'en') {
+    otherPostText = 'También disponible en español';
+  } else {
+    otherPostText = 'Also available in English';
+  }
+
   return (
     <Layout langSwitchTo="/b">
       <Post>
         <h1>{pageContext.frontmatter.title}</h1>
 
-        {otherPost && <Link to={otherPost.path}>{otherPost.context.lang}</Link>}
+        {otherPost && (
+          <OtherPost>
+            <Link to={otherPost.path}>{otherPostText}</Link>
+          </OtherPost>
+        )}
 
         {children}
       </Post>
