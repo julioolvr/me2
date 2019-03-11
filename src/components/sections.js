@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'gatsby';
 
 import LinkWithLang from 'src/components/link';
 
@@ -27,13 +26,13 @@ function Sections() {
         <LinkWithLang to="/me">me</LinkWithLang>
       </Page>
       <Page>
-        <Link to="/b">blog</Link>
+        <LinkWithLang to="/b">blog</LinkWithLang>
       </Page>
       <Page>
-        <Link to="/talks">talks</Link>
+        <LinkWithLang to="/talks">talks</LinkWithLang>
       </Page>
       <Page>
-        <Link to="/things">things</Link>
+        <LinkWithLang to="/things">things</LinkWithLang>
       </Page>
       <Page>
         <a href="https://github.com/julioolvr">github</a>

@@ -61,6 +61,10 @@ function addLangToPage({ page, actions }) {
     const prefix = lang === DEFAULT_LANG ? '' : `/${lang}`;
     newPage.path = prefix.concat(newPage.path.replace(`.${lang}`, ''));
 
+    if (newPage.path.endsWith('/index/')) {
+      newPage.path = newPage.path.replace(/\/index\/$/, '');
+    }
+
     newPage.context = {
       ...page.context,
       lang,

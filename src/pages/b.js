@@ -29,6 +29,7 @@ function bestPostForLang(lang) {
     if (postGroup[lang]) {
       return postGroup[lang];
     }
+
     return postGroup[Object.keys(postGroup)[0]];
   };
 }

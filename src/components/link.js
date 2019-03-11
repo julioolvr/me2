@@ -2,20 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import { WithLang } from 'src/components/languageToggle';
-
-function toSpanish(to) {
-  if (to.startsWith('/es')) {
-    return to;
-  }
-  return `/es${to}`;
-}
-
-function toEnglish(to) {
-  if (to.startsWith('/es')) {
-    return to.replace(/^\/es/, '');
-  }
-  return to;
-}
+import { toSpanish, toEnglish } from 'src/utils/lang';
 
 function LinkWithLang({ lang, to, ...props }) {
   return (

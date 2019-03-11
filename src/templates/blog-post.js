@@ -19,7 +19,7 @@ export default function Template({ data, pageContext, children }) {
   const otherPost = otherPostNode && otherPostNode.node;
 
   return (
-    <Layout>
+    <Layout langSwitchTo="/b">
       <Post>
         <h1>{pageContext.frontmatter.title}</h1>
 

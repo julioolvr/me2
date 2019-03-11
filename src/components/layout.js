@@ -8,6 +8,7 @@ import 'highlight.js/styles/arduino-light.css';
 
 import Header from 'src/components/header';
 import { LangProvider, WithLang } from 'src/components/languageToggle';
+import LangSwitch from 'src/components/langSwitch';
 
 // TODO: Define a theme with color variables
 
@@ -38,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function Layout({
-  centered, children, withHeader, ...props
+  centered, children, withHeader, langSwitchTo, ...props
 }) {
   return (
     <StaticQuery
@@ -65,6 +66,8 @@ function Layout({
               {children}
             </Content>
           </Container>
+
+          <LangSwitch to={langSwitchTo} />
         </LangProvider>
       )}
     />
@@ -75,11 +78,13 @@ Layout.propTypes = {
   centered: PropTypes.bool,
   children: PropTypes.node.isRequired,
   withHeader: PropTypes.bool,
+  langSwitchTo: PropTypes.string,
 };
 
 Layout.defaultProps = {
   centered: false,
   withHeader: true,
+  langSwitchTo: null,
 };
 
 export default Layout;
