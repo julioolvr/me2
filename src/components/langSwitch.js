@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { Location } from '@reach/router';
 
 import { WithLang } from 'src/components/languageToggle';
 import { toSpanish, toEnglish } from 'src/utils/lang';
@@ -54,23 +55,26 @@ English.defaultProps = {
 };
 
 function LangSwitch({ to }) {
-  const toOrDefault = to || window.location.pathname;
-
   return (
-    <Container>
-      <WithLang>
-        {lang => (lang === 'es' ? <English to={toOrDefault} /> : <Spanish to={toOrDefault} />)}
-      </WithLang>
-    </Container>
+    <Location>
+      {({ location }) => (
+        <Container>
+          <WithLang>
+            {lang => (lang === 'es' ? (
+              <English to={to || location.pathname} />
+            ) : (
+              <Spanish to={to || location.pathname} />
+            ))
+            }
+          </WithLang>
+        </Container>
+      )}
+    </Location>
   );
 }
 
 LangSwitch.propTypes = {
-  to: PropTypes.string,
-};
-
-LangSwitch.defaultProps = {
-  to: null,
+  to: PropTypes.string.isRequired,
 };
 
 export default LangSwitch;

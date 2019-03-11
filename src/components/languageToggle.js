@@ -8,7 +8,10 @@ const DEFAULT_LANG = 'en';
 
 class LangProvider extends React.Component {
   state = {
-    lang: window.location.pathname.startsWith('/es') ? 'es' : DEFAULT_LANG,
+    lang:
+      typeof window !== 'undefined' && window.location.pathname.startsWith('/es')
+        ? 'es'
+        : DEFAULT_LANG,
     setLang: (newLang) => {
       const { lang } = this.state;
       if (newLang !== lang) {
