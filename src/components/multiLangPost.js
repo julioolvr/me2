@@ -19,6 +19,14 @@ const Extra = styled.span`
   vertical-align: -0.3em;
 `;
 
+const PostRow = styled.li`
+  display: flex;
+`;
+
+const PostTitle = styled.div`
+  flex: 1;
+`;
+
 function currentLang(group, lang) {
   return group[lang];
 }
@@ -39,11 +47,12 @@ function MultiLangPost({ postGroup, lang }) {
 
   if (postInCurrentLang && !postInOtherLang) {
     return (
-      <li>
+      <PostRow>
         <Time>{postInCurrentLang.context.date}</Time>
-
-        <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
-      </li>
+        <PostTitle>
+          <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
+        </PostTitle>
+      </PostRow>
     );
   }
 
@@ -57,14 +66,16 @@ function MultiLangPost({ postGroup, lang }) {
     }
 
     return (
-      <li>
+      <PostRow>
         <Time>{postInOtherLang.context.date}</Time>
 
-        <Link to={postInOtherLang.path}>{postInOtherLang.context.frontmatter.title}</Link>
-        <Extra>
-          <span>{warningText}</span>
-        </Extra>
-      </li>
+        <PostTitle>
+          <Link to={postInOtherLang.path}>{postInOtherLang.context.frontmatter.title}</Link>
+          <Extra>
+            <span>{warningText}</span>
+          </Extra>
+        </PostTitle>
+      </PostRow>
     );
   }
 
@@ -77,14 +88,16 @@ function MultiLangPost({ postGroup, lang }) {
   }
 
   return (
-    <li>
+    <PostRow>
       <Time>{postInCurrentLang.context.date}</Time>
 
-      <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
-      <Extra>
-        <Link to={postInOtherLang.path}>{infoText}</Link>
-      </Extra>
-    </li>
+      <PostTitle>
+        <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
+        <Extra>
+          <Link to={postInOtherLang.path}>{infoText}</Link>
+        </Extra>
+      </PostTitle>
+    </PostRow>
   );
 }
 
