@@ -48,6 +48,7 @@ module.exports = {
         mdPlugins: [remarkHighlight],
         defaultLayouts: {
           posts: require.resolve('./src/templates/blog-post'),
+          default: require.resolve('./src/templates/page'),
         },
       },
     },

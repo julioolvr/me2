@@ -7,7 +7,6 @@ import Layout from '../components/layout';
 
 const Post = styled.article`
   max-width: 40em;
-  padding: 1.5em;
   margin: 0 auto;
 `;
 

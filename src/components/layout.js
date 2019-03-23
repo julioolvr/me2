@@ -20,8 +20,8 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  padding-top: 2em;
-  padding-bottom: 2em;
+  padding: 2em 1em;
+  max-width: 100vw;
   flex: 1;
 
   ${props => props.centered

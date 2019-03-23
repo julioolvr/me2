@@ -74,7 +74,11 @@ function LangSwitch({ to }) {
 }
 
 LangSwitch.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
+};
+
+LangSwitch.defaultProps = {
+  to: null,
 };
 
 export default LangSwitch;
