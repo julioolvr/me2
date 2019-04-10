@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 
@@ -31,6 +32,10 @@ export default function Template({ data, pageContext, children }) {
 
   return (
     <Layout langSwitchTo="/b">
+      <Helmet>
+        <title>{pageContext.frontmatter.title}</title>
+      </Helmet>
+
       <Post>
         <h1>{pageContext.frontmatter.title}</h1>
 
