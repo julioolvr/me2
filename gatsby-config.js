@@ -2,7 +2,7 @@ const remarkHighlight = require('remark-highlight.js');
 
 module.exports = {
   siteMetadata: {
-    title: 'Julito',
+    title: 'Julio',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
