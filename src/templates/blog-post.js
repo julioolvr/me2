@@ -18,13 +18,13 @@ const OtherPost = styled.div`
 export default function Template({ data, pageContext, children }) {
   // I don't know more than two languages :)
   const otherPostNode = data.posts.edges.filter(
-    ({ node }) => node.context.lang !== pageContext.lang,
+    ({ node }) => node.context.langKey !== pageContext.langKey,
   )[0];
   const otherPost = otherPostNode && otherPostNode.node;
 
   let otherPostText;
 
-  if (pageContext.lang === 'en') {
+  if (pageContext.langKey === 'en') {
     otherPostText = 'También disponible en español';
   } else {
     otherPostText = 'Also available in English';

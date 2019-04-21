@@ -17,7 +17,7 @@ export const query = graphql`
           path
           context {
             key
-            lang
+            langKey
             date
             frontmatter {
               title

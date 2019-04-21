@@ -6,7 +6,6 @@ import {
   groupWith, groupBy, compose, map, head, prop,
 } from 'ramda';
 
-import { WithLang } from 'src/components/languageToggle';
 import MultiLangPost from 'src/components/multiLangPost';
 import Layout from 'src/components/layout';
 
@@ -16,31 +15,32 @@ const PostsList = styled.ol`
   padding: 0;
 `;
 
-function Blog({ data }) {
+function Blog({ data, pageContext }) {
   const posts = compose(
     map(map(head)),
-    map(groupBy(edge => edge.context.lang)),
+    map(groupBy(edge => edge.context.langKey)),
     groupWith((a, b) => a.context.key === b.context.key),
     map(prop('node')),
   )(data.posts.edges);
 
   return (
     <Layout centered>
-      <WithLang>
-        {lang => (
-          <PostsList>
-            {posts.map(postGroup => (
-              <MultiLangPost postGroup={postGroup} lang={lang} />
-            ))}
-          </PostsList>
-        )}
-      </WithLang>
+      <PostsList>
+        {posts.map(postGroup => (
+          <MultiLangPost
+            key={Object.values(postGroup)[0].context.key}
+            postGroup={postGroup}
+            lang={pageContext.langKey}
+          />
+        ))}
+      </PostsList>
     </Layout>
   );
 }
 
 Blog.propTypes = {
   data: PropTypes.shape({ posts: PropTypes.object }).isRequired,
+  pageContext: PropTypes.shape({ langKey: PropTypes.string.isRequired }).isRequired,
 };
 
 export default Blog;
@@ -56,7 +56,7 @@ export const query = graphql`
           path
           context {
             key
-            lang
+            langKey
             date
             frontmatter {
               title
