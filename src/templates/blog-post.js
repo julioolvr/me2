@@ -6,9 +6,16 @@ import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 
+const Title = styled.header`
+  h1 {
+    font-family: 'Georgia', serif;
+  }
+`;
+
 const Post = styled.article`
   max-width: 35em;
   margin: 0 auto;
+  font-family: 'Georgia', serif;
 `;
 
 const OtherPost = styled.div`
@@ -37,7 +44,9 @@ export default function Template({ data, pageContext, children }) {
       </Helmet>
 
       <Post>
-        <h1>{pageContext.frontmatter.title}</h1>
+        <Title>
+          <h1>{pageContext.frontmatter.title}</h1>
+        </Title>
 
         {otherPost && (
           <OtherPost>

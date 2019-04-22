@@ -3,7 +3,7 @@ import theme from 'typography-theme-fairy-gates';
 
 const typography = new Typography({
   ...theme,
-  baseFontSize: '22px',
+  baseFontSize: '20px',
   baseLineHeight: 1.7,
 });
 
