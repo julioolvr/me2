@@ -8,10 +8,14 @@ const Container = styled.div`
   text-align: center;
 `;
 
+const Name = styled.p`
+  margin-bottom: 0.5rem;
+`;
+
 const IndexPage = () => (
   <Layout centered withHeader={false}>
     <Container>
-      <p>Julio Olivera</p>
+      <Name>Julio Olivera</Name>
       <Sections />
     </Container>
   </Layout>

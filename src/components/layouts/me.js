@@ -7,7 +7,7 @@ import MeSwitch from 'src/components/meSwitch';
 import { WithLang } from 'src/components/languageToggle';
 
 const Container = styled.div`
-  width: 25em;
+  width: 20em;
   text-align: center;
 `;
 
