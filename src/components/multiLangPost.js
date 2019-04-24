@@ -6,7 +6,6 @@ import styled from 'styled-components';
 const Time = styled.time`
   min-width: 100px;
   display: inline-block;
-  text-align: right;
   font-size: 0.8em;
   color: #888; // TODO: Theme?
   margin-right: 1em;
@@ -15,16 +14,21 @@ const Time = styled.time`
 const Extra = styled.span`
   display: inline-block;
   font-size: 0.7em;
-  margin-left: 0.5em;
-  vertical-align: -0.3em;
 `;
 
 const PostRow = styled.li`
   display: flex;
+  flex-direction: column;
+  margin-bottom: 1.3em;
 `;
 
 const PostTitle = styled.div`
   flex: 1;
+  line-height: 1.2em;
+
+  a {
+    background-image: none;
+  }
 `;
 
 function currentLang(group, lang) {
@@ -48,10 +52,10 @@ function MultiLangPost({ postGroup, lang }) {
   if (postInCurrentLang && !postInOtherLang) {
     return (
       <PostRow>
-        <Time>{postInCurrentLang.context.date}</Time>
         <PostTitle>
           <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
         </PostTitle>
+        <Time>{postInCurrentLang.context.date}</Time>
       </PostRow>
     );
   }
@@ -67,14 +71,13 @@ function MultiLangPost({ postGroup, lang }) {
 
     return (
       <PostRow>
-        <Time>{postInOtherLang.context.date}</Time>
-
         <PostTitle>
           <Link to={postInOtherLang.path}>{postInOtherLang.context.frontmatter.title}</Link>
-          <Extra>
-            <span>{warningText}</span>
-          </Extra>
         </PostTitle>
+        <Time>{postInOtherLang.context.date}</Time>
+        <Extra>
+          <span>{warningText}</span>
+        </Extra>
       </PostRow>
     );
   }
@@ -89,14 +92,13 @@ function MultiLangPost({ postGroup, lang }) {
 
   return (
     <PostRow>
-      <Time>{postInCurrentLang.context.date}</Time>
-
       <PostTitle>
         <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
-        <Extra>
-          <Link to={postInOtherLang.path}>{infoText}</Link>
-        </Extra>
       </PostTitle>
+      <Time>{postInCurrentLang.context.date}</Time>
+      <Extra>
+        <Link to={postInOtherLang.path}>{infoText}</Link>
+      </Extra>
     </PostRow>
   );
 }

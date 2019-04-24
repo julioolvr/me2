@@ -11,6 +11,7 @@ import Layout from 'src/components/layout';
 
 const PostsList = styled.ol`
   list-style: none;
+  width: 35em;
   margin: 0;
   padding: 0;
 `;
