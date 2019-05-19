@@ -19,9 +19,6 @@ function Sections() {
   return (
     <Pages>
       <Page>
-        <LinkWithLang to="/me">me</LinkWithLang>
-      </Page>
-      <Page>
         <LinkWithLang to="/b">blog</LinkWithLang>
       </Page>
       <Page>
