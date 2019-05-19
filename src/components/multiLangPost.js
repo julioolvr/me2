@@ -7,7 +7,7 @@ const Time = styled.time`
   min-width: 100px;
   display: inline-block;
   font-size: 0.8em;
-  color: #888; // TODO: Theme?
+  color: ${({ theme }) => theme.colors.lightText};
   margin-right: 1em;
 `;
 

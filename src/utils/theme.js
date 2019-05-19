@@ -11,7 +11,9 @@ export const theme = {
     background: '#fafafa',
     main: '#458dce',
     lightBackground: '#f1f1f1',
-    code: '#2f6690',
+    code: '#AB314E',
+    text: '#333333',
+    lightText: '#888888',
   },
   fonts: {
     sansSerif: "'Fira Sans', sans-serif",
@@ -28,6 +30,8 @@ export const GlobalStyle = createGlobalStyle`
     ${typography.body};
     font-family: ${({ theme }) => theme.fonts.serif};
     background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text};
+    word-break: break-word;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -73,6 +77,10 @@ export const GlobalStyle = createGlobalStyle`
 
   code {
     color: ${({ theme }) => theme.colors.code};
+  }
+
+  a code {
+    color: ${({ theme }) => theme.colors.main};
   }
 
   code[class*='language-'],

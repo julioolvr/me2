@@ -6,15 +6,27 @@ import { Helmet } from 'react-helmet';
 
 import Layout from '../components/layout';
 
-const Title = styled.header``;
+const Title = styled.h1`
+  margin-top: 0;
+  margin-bottom: 0;
+`;
 
 const Post = styled.article`
-  max-width: 35em;
+  max-width: 40em;
   margin: 0 auto;
 `;
 
 const OtherPost = styled.div`
   font-size: 0.8em;
+`;
+
+const Time = styled.time`
+  color: ${({ theme }) => theme.colors.lightText};
+  font-size: 0.8em;
+`;
+
+const Content = styled.div`
+  margin-top: 2em;
 `;
 
 export default function Template({ data, pageContext, children }) {
@@ -39,9 +51,9 @@ export default function Template({ data, pageContext, children }) {
       </Helmet>
 
       <Post>
-        <Title>
-          <h1>{pageContext.frontmatter.title}</h1>
-        </Title>
+        <Time>{pageContext.date}</Time>
+
+        <Title>{pageContext.frontmatter.title}</Title>
 
         {otherPost && (
           <OtherPost>
@@ -49,7 +61,7 @@ export default function Template({ data, pageContext, children }) {
           </OtherPost>
         )}
 
-        {children}
+        <Content>{children}</Content>
       </Post>
     </Layout>
   );
@@ -57,7 +69,13 @@ export default function Template({ data, pageContext, children }) {
 
 Template.propTypes = {
   children: PropTypes.node.isRequired,
-  pageContext: PropTypes.shape({ lang: PropTypes.string.isRequired }).isRequired,
+  pageContext: PropTypes.shape({
+    langKey: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    frontmatter: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   data: PropTypes.shape({
     posts: PropTypes.shape({ edges: PropTypes.arrayOf(PropTypes.object) }),
   }).isRequired,
