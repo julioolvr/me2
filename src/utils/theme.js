@@ -58,7 +58,7 @@ export const GlobalStyle = createGlobalStyle`
     ${typography.h6};
   }
 
-  article, p, ol, ul, pre, header, footer {
+  article, p, ol, ul, pre {
     ${typography.content};
   }
 

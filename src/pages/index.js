@@ -28,7 +28,7 @@ const IndexPage = () => (
     <Wrapper>
       <Content>
         <Name>Julio Olivera</Name>
-        <Sections />
+        <Sections big vertical />
       </Content>
     </Wrapper>
   </Layout>
