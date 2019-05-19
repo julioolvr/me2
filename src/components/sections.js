@@ -7,16 +7,12 @@ const Pages = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
+  font-family: ${({ theme }) => theme.fonts.sansSerif};
 `;
 
 const Page = styled.li`
-  padding: 0 10px;
   margin: 0;
-
-  & + & {
-    border-left: 1px solid black;
-  }
+  font-size: 1.5em;
 `;
 
 function Sections() {

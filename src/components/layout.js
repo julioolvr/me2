@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
-import styled, { createGlobalStyle, css } from 'styled-components';
+import styled, { css, ThemeProvider } from 'styled-components';
 
 import 'highlight.js/styles/arduino-light.css';
+import { theme, GlobalStyle } from 'src/utils/theme';
 
 import Header from 'src/components/header';
 import { LangProvider, WithLang } from 'src/components/languageToggle';
@@ -20,9 +21,13 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 2em 1em;
   max-width: 100vw;
   flex: 1;
+
+  ${props => props.withPadding
+    && css`
+      padding: 2em 1em;
+    `}
 
   ${props => props.centered
     && css`
@@ -30,16 +35,23 @@ const Content = styled.div`
       justify-content: center;
       align-items: center;
     `}
+
+  ${props => props.verticalCenter
+    && css`
+      display: flex;
+      align-items: center;
+    `}
 `;
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: #fafafa;
-  }
-`;
-
+// Base Layout component for all pages
 function Layout({
-  centered, children, withHeader, langSwitchTo, ...props
+  centered,
+  verticalCenter,
+  withPadding,
+  children,
+  withHeader,
+  langSwitchTo,
+  ...props
 }) {
   return (
     <StaticQuery
@@ -54,20 +66,29 @@ function Layout({
       `}
       render={data => (
         <LangProvider>
-          <Helmet title={data.site.siteMetadata.title}>
-            <WithLang>{lang => <html lang={lang} />}</WithLang>
-          </Helmet>
+          <ThemeProvider theme={theme}>
+            <>
+              <Helmet title={data.site.siteMetadata.title}>
+                <WithLang>{lang => <html lang={lang} />}</WithLang>
+              </Helmet>
 
-          <GlobalStyle />
+              <GlobalStyle />
 
-          <Container>
-            {withHeader ? <Header /> : null}
-            <Content centered={centered} {...props}>
-              {children}
-            </Content>
-          </Container>
+              <Container>
+                {withHeader ? <Header /> : null}
+                <Content
+                  centered={centered}
+                  verticalCenter={verticalCenter}
+                  withPadding={withPadding}
+                  {...props}
+                >
+                  {children}
+                </Content>
+              </Container>
 
-          <LangSwitch to={langSwitchTo} />
+              <LangSwitch to={langSwitchTo} />
+            </>
+          </ThemeProvider>
         </LangProvider>
       )}
     />
@@ -76,15 +97,19 @@ function Layout({
 
 Layout.propTypes = {
   centered: PropTypes.bool,
+  verticalCenter: PropTypes.bool,
   children: PropTypes.node.isRequired,
   withHeader: PropTypes.bool,
   langSwitchTo: PropTypes.string,
+  withPadding: PropTypes.bool,
 };
 
 Layout.defaultProps = {
   centered: false,
+  verticalCenter: false,
   withHeader: true,
   langSwitchTo: null,
+  withPadding: true,
 };
 
 export default Layout;

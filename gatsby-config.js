@@ -26,12 +26,6 @@ module.exports = {
         display: 'minimal-ui',
       },
     },
-    {
-      resolve: 'gatsby-plugin-typography',
-      options: {
-        pathToConfigModule: 'src/utils/typography',
-      },
-    },
     'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-mdx',
@@ -60,6 +54,12 @@ module.exports = {
         langKeyDefault: 'en',
         useLangKeyLayout: false,
         prefixDefault: false,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-fonts',
+      options: {
+        fonts: ['Merriweather:400,400i,700,700i', 'Fira Sans:400'],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
