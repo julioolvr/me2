@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { css, ThemeProvider } from 'styled-components';
 
-import 'highlight.js/styles/arduino-light.css';
 import { theme, GlobalStyle } from 'src/utils/theme';
 
 import Header from 'src/components/header';

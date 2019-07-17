@@ -1,5 +1,5 @@
-import 'prismjs/themes/prism-coy.css';
 import 'firacode/distr/fira_code.css';
+import 'highlight.js/styles/hybrid.css';
 
 import { createGlobalStyle } from 'styled-components';
 
@@ -88,13 +88,17 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono',
       monospace;
 
-    background-color: ${({ theme }) => theme.colors.lightBackground};
-    border-left: 2px solid black;
+    padding: 1em;
+    border-radius: 3px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 5px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+  }
+
+  @media only screen and (min-device-width: 812px) {
+    code[class*='language-'],
+    pre[class*='language-'] {
+      width: 110%;
+      margin-left: -5%;
+    }
   }
 `;
 /* eslint-enable no-shadow */
