@@ -91,9 +91,10 @@ export const GlobalStyle = createGlobalStyle`
     padding: 1em;
     border-radius: 3px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
+    word-break: normal;
   }
 
-  @media only screen and (min-device-width: 812px) {
+  @media only screen and (min-width: 812px) {
     code[class*='language-'],
     pre[class*='language-'] {
       width: 110%;
