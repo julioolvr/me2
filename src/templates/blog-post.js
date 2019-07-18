@@ -77,6 +77,8 @@ Template.propTypes = {
     }).isRequired,
   }).isRequired,
   data: PropTypes.shape({
-    posts: PropTypes.shape({ edges: PropTypes.arrayOf(PropTypes.object) }),
+    posts: PropTypes.shape({
+      edges: PropTypes.arrayOf(PropTypes.object),
+    }),
   }).isRequired,
 };

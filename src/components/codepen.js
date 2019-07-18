@@ -13,7 +13,8 @@ function Codepen({ id, username }) {
     >
       See the Pen
       <a href={`http://codepen.io/${username}/pen/${id}/`}>{id}</a>
-      by {username}(<a href={`http://codepen.io/${username}`}>@{username}</a>) on{' '}
+      by {username}(
+      <a href={`http://codepen.io/${username}`}>@{username}</a>) on{' '}
       <a href="http://codepen.io">CodePen</a>.
       <Helmet>
         <script async src="//codepen.io/assets/embed/ei.js" />

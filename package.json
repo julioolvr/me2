@@ -44,7 +44,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "format": "prettier-eslint --write \"**/*.js\"",
+    "format": "prettier-eslint --print-width 74 --write \"**/*.js\" \"**/*.mdx\" --prose-wrap always",
     "lint": "eslint \"**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -9,7 +9,8 @@ const DEFAULT_LANG = 'en';
 class LangProvider extends React.Component {
   state = {
     lang:
-      typeof window !== 'undefined' && window.location.pathname.startsWith('/es')
+      typeof window !== 'undefined'
+      && window.location.pathname.startsWith('/es')
         ? 'es'
         : DEFAULT_LANG,
     setLang: (newLang) => {
@@ -18,12 +19,16 @@ class LangProvider extends React.Component {
         this.setState({ lang });
       }
     },
-    toggleLang: () => this.setState(prevState => ({ lang: prevState.lang === 'en' ? 'es' : 'en' })),
+    toggleLang: () => this.setState(prevState => ({
+      lang: prevState.lang === 'en' ? 'es' : 'en',
+    })),
   }
 
   render() {
     const { children } = this.props;
-    return <Context.Provider value={this.state}>{children}</Context.Provider>;
+    return (
+      <Context.Provider value={this.state}>{children}</Context.Provider>
+    );
   }
 }
 
@@ -32,7 +37,9 @@ LangProvider.propTypes = {
 };
 
 function WithLang({ children }) {
-  return <Context.Consumer>{({ lang }) => children(lang)}</Context.Consumer>;
+  return (
+    <Context.Consumer>{({ lang }) => children(lang)}</Context.Consumer>
+  );
 }
 
 WithLang.propTypes = {
@@ -40,7 +47,11 @@ WithLang.propTypes = {
 };
 
 function LangToggle({ children }) {
-  return <Context.Consumer>{({ toggleLang }) => children(toggleLang)}</Context.Consumer>;
+  return (
+    <Context.Consumer>
+      {({ toggleLang }) => children(toggleLang)}
+    </Context.Consumer>
+  );
 }
 
 LangToggle.propTypes = {
@@ -48,7 +59,11 @@ LangToggle.propTypes = {
 };
 
 function LangSetter({ children }) {
-  return <Context.Consumer>{({ setLang }) => children(setLang)}</Context.Consumer>;
+  return (
+    <Context.Consumer>
+      {({ setLang }) => children(setLang)}
+    </Context.Consumer>
+  );
 }
 
 LangSetter.propTypes = {

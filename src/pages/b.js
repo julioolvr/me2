@@ -41,7 +41,8 @@ function Blog({ data, pageContext }) {
 
 Blog.propTypes = {
   data: PropTypes.shape({ posts: PropTypes.object }).isRequired,
-  pageContext: PropTypes.shape({ langKey: PropTypes.string.isRequired }).isRequired,
+  pageContext: PropTypes.shape({ langKey: PropTypes.string.isRequired })
+    .isRequired,
 };
 
 export default Blog;

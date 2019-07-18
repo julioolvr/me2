@@ -8,11 +8,17 @@ const path = require('path');
 const createLogger = require('debug');
 
 const onCreateNodeLogger = createLogger('me:gatsby-node:onCreateNode');
-const addPostDataToContextLogger = createLogger('me:gatsby-node:addPostDataToContextLogger');
+const addPostDataToContextLogger = createLogger(
+  'me:gatsby-node:addPostDataToContextLogger',
+);
 
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type !== 'Mdx') return;
-  if (!node.fileAbsolutePath.replace(__dirname, '').startsWith('/src/pages/b')) return;
+  if (
+    !node.fileAbsolutePath
+      .replace(__dirname, '')
+      .startsWith('/src/pages/b')
+  ) return;
 
   const { createNodeField } = actions;
 
@@ -47,7 +53,9 @@ function addPostDataToContext({ page, actions }) {
     const newPage = { ...page };
 
     // Extract date and key from the path
-    const [, date, key] = newPage.path.match(/\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)/);
+    const [, date, key] = newPage.path.match(
+      /\/b\/(\d{4}\/\d{2}\/\d{2})\/([^.]+)/,
+    );
 
     newPage.context = {
       ...page.context,
