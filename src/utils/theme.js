@@ -5,16 +5,29 @@ import { createGlobalStyle } from 'styled-components';
 
 import typography from './shevy';
 
+// Color palette https://paletton.com/#uid=53z0u0kmVJ-clUhiaOTrCE6z+vx
+const colors = {
+  background: '#fafafa',
+  backgroundDarker: '#f0f0f0',
+  main: '#458dce',
+  mainDark: '#2676BF',
+  mainDarker: '#0A5AA3',
+  mainLight: '#68A6DD',
+  mainLighter: '#98C4EC',
+  accent: '#3CD299',
+  accentDark: '#1BC484',
+  accentDarker: '#00AA6A',
+  accentLight: '#61E0B0',
+  accentLighter: '#92EECB',
+  lightBackground: '#f1f1f1',
+  darkBackground: '#1d1f21',
+  text: '#333333',
+  lightText: '#888888',
+};
+
 export const theme = {
   typography,
-  colors: {
-    background: '#fafafa',
-    main: '#458dce',
-    lightBackground: '#f1f1f1',
-    code: '#AB314E',
-    text: '#333333',
-    lightText: '#888888',
-  },
+  colors,
   fonts: {
     sansSerif: "'Fira Sans', sans-serif",
     serif: 'Merriweather, serif',
@@ -76,7 +89,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   code {
-    color: ${({ theme }) => theme.colors.code};
+    color: ${({ theme }) => theme.colors.text};
+    background-color: ${({ theme }) => theme.colors.backgroundDarker};
+    padding: 4px 6px;
+    border-radius: 2px;
   }
 
   a code {
