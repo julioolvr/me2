@@ -59,7 +59,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
-        fonts: ['Merriweather:400,400i,700,700i', 'Fira Sans:400'],
+        fonts: ['Merriweather:300,300i,700,700i', 'Fira Sans:400'],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
