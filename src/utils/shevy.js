@@ -1,9 +1,11 @@
 import Shevy from 'shevyjs';
 
 const shevy = new Shevy({
-  baseFontSize: '16px',
-  baseLineHeight: 1.9,
-  baseFontScale: 'minorThird',
+  baseFontSize: '17px',
+  baseLineHeight: 2,
+  baseFontScale: 'majorThird',
+  proximity: true,
+  proximityFactor: 0.5,
 });
 
 export default shevy;
