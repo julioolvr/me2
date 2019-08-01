@@ -22,7 +22,8 @@ const OtherPost = styled.div`
 
 const Time = styled.time`
   color: ${({ theme }) => theme.colors.lightText};
-  font-size: 0.8em;
+  display: block;
+  margin-top: 0.5em;
 `;
 
 const Content = styled.div`
@@ -51,9 +52,8 @@ export default function Template({ data, pageContext, children }) {
       </Helmet>
 
       <Post>
-        <Time>{pageContext.date}</Time>
-
         <Title>{pageContext.frontmatter.title}</Title>
+        <Time>{pageContext.date}</Time>
 
         {otherPost && (
           <OtherPost>

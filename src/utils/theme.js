@@ -53,6 +53,7 @@ export const GlobalStyle = createGlobalStyle`
 
   h1 {
     ${typography.h1};
+    line-height: 1.05;
   }
 
   h2 {
