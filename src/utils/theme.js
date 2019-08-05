@@ -89,6 +89,10 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: underline;
   }
 
+  pre {
+    line-height: 1.5;
+  }
+
   code {
     color: ${({ theme }) => theme.colors.text};
     background-color: ${({ theme }) => theme.colors.backgroundDarker};
