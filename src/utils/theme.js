@@ -3,8 +3,6 @@ import 'highlight.js/styles/hybrid.css';
 
 import { createGlobalStyle } from 'styled-components';
 
-import typography from './shevy';
-
 // Color palette https://paletton.com/#uid=53z0u0kmVJ-clUhiaOTrCE6z+vx
 const colors = {
   background: '#fafafa',
@@ -25,8 +23,56 @@ const colors = {
   lightText: '#888888',
 };
 
+const typography = {
+  scale: [
+    '12px',
+    '14px',
+    '16px',
+    '18px',
+    '20px',
+    '24px',
+    '30px',
+    '36px',
+    '48px',
+    '60px',
+    '72px',
+  ],
+};
+
+typography.body = typography.scale[2];
+typography.h1 = typography.scale[8];
+typography.h2 = typography.scale[7];
+typography.h3 = typography.scale[6];
+typography.h4 = typography.scale[5];
+typography.h5 = typography.scale[4];
+typography.h6 = typography.scale[3];
+
+const spacing = {
+  scale: [
+    '4px',
+    '8px',
+    '12px',
+    '16px',
+    '24px',
+    '32px',
+    '48px',
+    '64px',
+    '96px',
+    '128px',
+    '192px',
+    '256px',
+    '384px',
+    '512px',
+    '640px',
+    '768px',
+  ],
+};
+
+spacing.base = spacing.scale[3];
+
 export const theme = {
   typography,
+  spacing,
   colors,
   fonts: {
     sansSerif: "'Fira Sans', sans-serif",
@@ -40,7 +86,8 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    ${typography.body};
+    font-size: ${({ theme }) => theme.typography.body};
+    line-height: 1.5em;
     font-family: ${({ theme }) => theme.fonts.serif};
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
@@ -52,32 +99,32 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   h1 {
-    ${typography.h1};
+    font-size: ${({ theme }) => theme.typography.h1};
     line-height: 1.05;
   }
 
   h2 {
-    ${typography.h2};
+    font-size: ${({ theme }) => theme.typography.h2};
   }
 
   h3 {
-    ${typography.h3};
+    font-size: ${({ theme }) => theme.typography.h3};
   }
 
   h4 {
-    ${typography.h4};
+    font-size: ${({ theme }) => theme.typography.h4};
   }
 
   h5 {
-    ${typography.h5};
+    font-size: ${({ theme }) => theme.typography.h5};
   }
 
   h6 {
-    ${typography.h6};
+    font-size: ${({ theme }) => theme.typography.h6};
   }
 
-  article, p, ol, ul, pre {
-    ${typography.content};
+  p {
+    line-height: 2em;
   }
 
   a {

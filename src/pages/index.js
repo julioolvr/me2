@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import shevy from 'src/utils/shevy';
 import Layout from 'src/components/layout';
 import Sections from 'src/components/sections';
-
-const { baseSpacing } = shevy;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -14,8 +11,8 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   max-width: 40em;
-  margin-left: ${baseSpacing(0.5)};
-  padding-left: ${baseSpacing(0.5)};
+  margin-left: ${({ theme }) => theme.spacing.scale[4]};
+  padding-left: ${({ theme }) => theme.spacing.scale[3]};
   border-left: 2px solid ${({ theme }) => theme.colors.main};
 `;
 

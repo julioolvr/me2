@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import shevy from 'src/utils/shevy';
 import LinkWithLang from 'src/components/link';
-
-const { baseSpacing } = shevy;
 
 const Pages = styled.ul`
   margin: 0;
@@ -18,33 +15,34 @@ const Pages = styled.ul`
 
 const Page = styled.li`
   margin: 0;
+  margin-top: ${({ vertical, theme }) => vertical && theme.spacing.scale[2]};
 `;
 
 const Separator = styled.div.attrs({ children: '•' })`
   opacity: 0.3;
-  margin: 0 ${baseSpacing(0.3)};
+  margin: 0 ${({ theme }) => theme.spacing.scale[1]};
 `;
 
 function Sections({ big, vertical }) {
   return (
     <Pages big={big} vertical={vertical}>
-      <Page>
+      <Page vertical={vertical}>
         <LinkWithLang to="/b">blog</LinkWithLang>
       </Page>
       {!vertical && <Separator />}
-      <Page>
+      <Page vertical={vertical}>
         <LinkWithLang to="/talks">talks</LinkWithLang>
       </Page>
       {!vertical && <Separator />}
-      <Page>
+      <Page vertical={vertical}>
         <LinkWithLang to="/things">things</LinkWithLang>
       </Page>
       {!vertical && <Separator />}
-      <Page>
+      <Page vertical={vertical}>
         <a href="https://github.com/julioolvr">github</a>
       </Page>
       {!vertical && <Separator />}
-      <Page>
+      <Page vertical={vertical}>
         <a href="https://twitter.com/julioolvr">twitter</a>
       </Page>
     </Pages>
