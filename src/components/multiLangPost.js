@@ -54,7 +54,9 @@ function MultiLangPost({ postGroup, lang }) {
     return (
       <PostRow>
         <PostTitle>
-          <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
+          <Link to={postInCurrentLang.path}>
+            {postInCurrentLang.context.frontmatter.title}
+          </Link>
         </PostTitle>
         <Time>{postInCurrentLang.context.date}</Time>
       </PostRow>
@@ -73,7 +75,9 @@ function MultiLangPost({ postGroup, lang }) {
     return (
       <PostRow>
         <PostTitle>
-          <Link to={postInOtherLang.path}>{postInOtherLang.context.frontmatter.title}</Link>
+          <Link to={postInOtherLang.path}>
+            {postInOtherLang.context.frontmatter.title}
+          </Link>
         </PostTitle>
         <Time>{postInOtherLang.context.date}</Time>
         <Extra>
@@ -94,7 +98,9 @@ function MultiLangPost({ postGroup, lang }) {
   return (
     <PostRow>
       <PostTitle>
-        <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
+        <Link to={postInCurrentLang.path}>
+          {postInCurrentLang.context.frontmatter.title}
+        </Link>
       </PostTitle>
       <Time>{postInCurrentLang.context.date}</Time>
       <Extra>

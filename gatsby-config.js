@@ -39,6 +39,7 @@ module.exports = {
             },
           },
         ],
+        plugins: ['gatsby-remark-images'],
         mdPlugins: [remarkHighlight],
         defaultLayouts: {
           posts: require.resolve('./src/templates/blog-post'),

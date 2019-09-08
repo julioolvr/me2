@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 
 import { WithLang } from 'src/components/languageToggle';
@@ -23,5 +24,14 @@ function LinkWithLang({ lang, to, ...props }) {
     </WithLang>
   );
 }
+
+LinkWithLang.propTypes = {
+  lang: PropTypes.oneOf(['en', 'es']),
+  to: PropTypes.string.isRequired,
+};
+
+LinkWithLang.defaultProps = {
+  lang: null,
+};
 
 export default LinkWithLang;
