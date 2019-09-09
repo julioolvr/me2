@@ -39,7 +39,7 @@ const typography = {
   ],
 };
 
-typography.body = typography.scale[2];
+typography.body = typography.scale[3];
 typography.h1 = typography.scale[8];
 typography.h2 = typography.scale[7];
 typography.h3 = typography.scale[6];
