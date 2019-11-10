@@ -6,7 +6,8 @@ import Sections from 'src/components/sections';
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: center;
-  padding: ${({ theme }) => theme.spacing.scale[4]} ${({ theme }) => theme.spacing.scale[6]};
+  padding: ${({ theme }) => theme.spacing.scale[4]}
+    ${({ theme }) => theme.spacing.scale[6]};
   font-size: ${({ theme }) => theme.typography.scale[2]};
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
