@@ -12,7 +12,7 @@ const Title = styled.h1`
 `;
 
 const Post = styled.article`
-  max-width: 37em;
+  max-width: 40em;
   margin: 0 auto;
 `;
 

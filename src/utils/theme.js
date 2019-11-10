@@ -24,19 +24,7 @@ const colors = {
 };
 
 const typography = {
-  scale: [
-    '12px',
-    '14px',
-    '16px',
-    '18px',
-    '20px',
-    '24px',
-    '30px',
-    '36px',
-    '48px',
-    '60px',
-    '72px',
-  ],
+  scale: ['12px', '14px', '16px', '18px', '20px', '24px', '30px', '36px', '48px', '60px', '72px'],
 };
 
 typography.body = typography.scale[3];
@@ -125,6 +113,7 @@ export const GlobalStyle = createGlobalStyle`
 
   p {
     line-height: 2em;
+    margin-bottom: ${({ theme }) => theme.spacing.scale[5]};
   }
 
   a {
