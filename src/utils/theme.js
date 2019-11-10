@@ -62,6 +62,12 @@ export const theme = {
   typography,
   spacing,
   colors,
+  breakpoints: {
+    small: 640,
+    medium: 768,
+    large: 1024,
+    extraLarge: 1280,
+  },
   fonts: {
     sansSerif: "'Fira Sans', sans-serif",
     serif: 'Merriweather, serif',

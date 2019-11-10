@@ -11,16 +11,19 @@ const Pages = styled.ul`
   font-family: ${({ theme }) => theme.fonts.sansSerif};
   font-size: ${({ big }) => (big ? '1.5em' : '1em')};
   display: ${({ vertical }) => (vertical ? 'block' : 'flex')};
+  justify-content: space-between;
+  width: 100%;
+  min-width: ${({ theme }) => theme.spacing.scale[11]};
+  max-width: ${({ theme }) => theme.spacing.scale[12]};
+
+  a {
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 const Page = styled.li`
   margin: 0;
   margin-top: ${({ vertical, theme }) => vertical && theme.spacing.scale[2]};
-`;
-
-const Separator = styled.div.attrs({ children: '•' })`
-  opacity: 0.3;
-  margin: 0 ${({ theme }) => theme.spacing.scale[1]};
 `;
 
 function Sections({ big, vertical }) {
@@ -29,19 +32,15 @@ function Sections({ big, vertical }) {
       <Page vertical={vertical}>
         <LinkWithLang to="/b">blog</LinkWithLang>
       </Page>
-      {!vertical && <Separator />}
       <Page vertical={vertical}>
         <LinkWithLang to="/talks">talks</LinkWithLang>
       </Page>
-      {!vertical && <Separator />}
       <Page vertical={vertical}>
         <LinkWithLang to="/things">things</LinkWithLang>
       </Page>
-      {!vertical && <Separator />}
       <Page vertical={vertical}>
         <a href="https://github.com/julioolvr">github</a>
       </Page>
-      {!vertical && <Separator />}
       <Page vertical={vertical}>
         <a href="https://twitter.com/julioolvr">twitter</a>
       </Page>
