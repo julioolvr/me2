@@ -19,7 +19,7 @@ const colors = {
   accentLighter: '#92EECB',
   lightBackground: '#f1f1f1',
   darkBackground: '#1d1f21',
-  text: '#333333',
+  text: '#444444',
   lightText: '#888888',
 };
 

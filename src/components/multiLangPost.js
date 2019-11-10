@@ -4,31 +4,36 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const Time = styled.time`
-  min-width: 100px;
   display: inline-block;
   font-size: 0.8em;
   color: ${({ theme }) => theme.colors.lightText};
-  margin-right: 1em;
 `;
 
 const Extra = styled.span`
   display: inline-block;
   font-size: 0.7em;
+
+  a {
+    color: ${({ theme }) => theme.colors.text};
+  }
 `;
 
 const PostRow = styled.li`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${({ theme }) => theme.spacing.scale[5]};
+  margin-bottom: ${({ theme }) => theme.spacing.scale[6]};
 `;
 
 const PostTitle = styled.div`
   flex: 1;
   line-height: 1.2em;
-  font-size: ${({ theme }) => theme.typography.scale[3]};
+  font-size: ${({ theme }) => theme.typography.scale[6]};
+  font-family: ${({ theme }) => theme.fonts.sansSerif};
+  font-weight: bold;
 
   a {
     background-image: none;
+    color: ${({ theme }) => theme.colors.text};
   }
 `;
 
@@ -54,9 +59,7 @@ function MultiLangPost({ postGroup, lang }) {
     return (
       <PostRow>
         <PostTitle>
-          <Link to={postInCurrentLang.path}>
-            {postInCurrentLang.context.frontmatter.title}
-          </Link>
+          <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
         </PostTitle>
         <Time>{postInCurrentLang.context.date}</Time>
       </PostRow>
@@ -75,14 +78,15 @@ function MultiLangPost({ postGroup, lang }) {
     return (
       <PostRow>
         <PostTitle>
-          <Link to={postInOtherLang.path}>
-            {postInOtherLang.context.frontmatter.title}
-          </Link>
+          <Link to={postInOtherLang.path}>{postInOtherLang.context.frontmatter.title}</Link>
         </PostTitle>
-        <Time>{postInOtherLang.context.date}</Time>
-        <Extra>
-          <span>{warningText}</span>
-        </Extra>
+
+        <div>
+          <Time>{postInOtherLang.context.date}</Time>
+          <Extra>
+            <span>&nbsp;- {warningText}</span>
+          </Extra>
+        </div>
       </PostRow>
     );
   }
@@ -98,14 +102,15 @@ function MultiLangPost({ postGroup, lang }) {
   return (
     <PostRow>
       <PostTitle>
-        <Link to={postInCurrentLang.path}>
-          {postInCurrentLang.context.frontmatter.title}
-        </Link>
+        <Link to={postInCurrentLang.path}>{postInCurrentLang.context.frontmatter.title}</Link>
       </PostTitle>
-      <Time>{postInCurrentLang.context.date}</Time>
-      <Extra>
-        <Link to={postInOtherLang.path}>{infoText}</Link>
-      </Extra>
+
+      <div>
+        <Time>{postInCurrentLang.context.date} </Time>
+        <Extra>
+          &nbsp;- <Link to={postInOtherLang.path}>{infoText}</Link>
+        </Extra>
+      </div>
     </PostRow>
   );
 }

@@ -11,7 +11,7 @@ import Layout from 'src/components/layout';
 
 const PostsList = styled.ol`
   list-style: none;
-  width: 35em;
+  width: 40em;
   margin: 0;
   padding: 0;
 `;
@@ -41,8 +41,7 @@ function Blog({ data, pageContext }) {
 
 Blog.propTypes = {
   data: PropTypes.shape({ posts: PropTypes.object }).isRequired,
-  pageContext: PropTypes.shape({ langKey: PropTypes.string.isRequired })
-    .isRequired,
+  pageContext: PropTypes.shape({ langKey: PropTypes.string.isRequired }).isRequired,
 };
 
 export default Blog;
