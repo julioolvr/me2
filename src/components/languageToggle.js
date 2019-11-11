@@ -26,9 +26,7 @@ class LangProvider extends React.Component {
 
   render() {
     const { children } = this.props;
-    return (
-      <Context.Provider value={this.state}>{children}</Context.Provider>
-    );
+    return <Context.Provider value={this.state}>{children}</Context.Provider>;
   }
 }
 
@@ -37,9 +35,7 @@ LangProvider.propTypes = {
 };
 
 function WithLang({ children }) {
-  return (
-    <Context.Consumer>{({ lang }) => children(lang)}</Context.Consumer>
-  );
+  return <Context.Consumer>{({ lang }) => children(lang)}</Context.Consumer>;
 }
 
 WithLang.propTypes = {
@@ -60,9 +56,7 @@ LangToggle.propTypes = {
 
 function LangSetter({ children }) {
   return (
-    <Context.Consumer>
-      {({ setLang }) => children(setLang)}
-    </Context.Consumer>
+    <Context.Consumer>{({ setLang }) => children(setLang)}</Context.Consumer>
   );
 }
 

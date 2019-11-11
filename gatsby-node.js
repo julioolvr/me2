@@ -14,11 +14,7 @@ const addPostDataToContextLogger = createLogger(
 
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type !== 'Mdx') return;
-  if (
-    !node.fileAbsolutePath
-      .replace(__dirname, '')
-      .startsWith('/src/pages/b')
-  ) return;
+  if (!node.fileAbsolutePath.replace(__dirname, '').startsWith('/src/pages/b')) return;
 
   const { createNodeField } = actions;
 

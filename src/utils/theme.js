@@ -111,6 +111,7 @@ export const GlobalStyle = createGlobalStyle`
 
   h2 {
     font-size: ${({ theme }) => theme.typography.h2};
+    margin-top: ${({ theme }) => theme.spacing.scale[6]};
   }
 
   h3 {
