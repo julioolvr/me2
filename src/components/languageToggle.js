@@ -1,16 +1,15 @@
 /* eslint-disable react/no-unused-state */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-const Context = React.createContext('bleh');
-
 const DEFAULT_LANG = 'en';
+const Context = React.createContext();
 
 class LangProvider extends React.Component {
   state = {
     lang:
       typeof window !== 'undefined'
-      && window.location.pathname.startsWith('/es')
+        && window.location.pathname.startsWith('/es')
         ? 'es'
         : DEFAULT_LANG,
     setLang: (newLang) => {
@@ -64,6 +63,10 @@ LangSetter.propTypes = {
   children: PropTypes.func.isRequired,
 };
 
+function useLang() {
+  return useContext(Context).lang;
+}
+
 export {
-  LangProvider, LangToggle, LangSetter, WithLang,
+  LangProvider, LangToggle, LangSetter, WithLang, useLang,
 };

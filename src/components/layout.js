@@ -7,7 +7,7 @@ import styled, { css, ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from 'src/utils/theme';
 
 import Header from 'src/components/header';
-import { LangProvider, WithLang } from 'src/components/languageToggle';
+import { LangProvider, useLang } from 'src/components/languageToggle';
 import LangSwitch from 'src/components/langSwitch';
 
 // TODO: Define a theme with color variables
@@ -53,44 +53,48 @@ function Layout({
   ...props
 }) {
   return (
-    <StaticQuery
-      query={graphql`
-        query SiteTitleQuery {
-          site {
-            siteMetadata {
-              title
+    <LangProvider>
+      <StaticQuery
+        query={graphql`
+          query SiteTitleQuery {
+            site {
+              siteMetadata {
+                title
+              }
             }
           }
-        }
-      `}
-      render={data => (
-        <LangProvider>
-          <ThemeProvider theme={theme}>
-            <>
-              <Helmet title={data.site.siteMetadata.title}>
-                <WithLang>{lang => <html lang={lang} />}</WithLang>
-              </Helmet>
+        `}
+        render={(data) => {
+          const currentLang = useLang();
 
-              <GlobalStyle />
+          return (
+            <ThemeProvider theme={theme}>
+              <>
+                <Helmet title={data.site.siteMetadata.title}>
+                  <html lang={currentLang} />
+                </Helmet>
 
-              <Container>
-                {withHeader ? <Header /> : null}
-                <Content
-                  centered={centered}
-                  verticalCenter={verticalCenter}
-                  withPadding={withPadding}
-                  {...props}
-                >
-                  {children}
-                </Content>
-              </Container>
+                <GlobalStyle />
 
-              <LangSwitch to={langSwitchTo} />
-            </>
-          </ThemeProvider>
-        </LangProvider>
-      )}
-    />
+                <Container>
+                  {withHeader ? <Header /> : null}
+                  <Content
+                    centered={centered}
+                    verticalCenter={verticalCenter}
+                    withPadding={withPadding}
+                    {...props}
+                  >
+                    {children}
+                  </Content>
+                </Container>
+
+                <LangSwitch to={langSwitchTo} />
+              </>
+            </ThemeProvider>
+          );
+        }}
+      />
+    </LangProvider>
   );
 }
 
