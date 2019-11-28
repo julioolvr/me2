@@ -8,7 +8,6 @@ import { theme, GlobalStyle } from 'src/utils/theme';
 
 import Header from 'src/components/header';
 import { LangProvider, useLang } from 'src/components/languageToggle';
-import LangSwitch from 'src/components/langSwitch';
 
 // TODO: Define a theme with color variables
 
@@ -49,7 +48,6 @@ function Layout({
   withPadding,
   children,
   withHeader,
-  langSwitchTo,
   ...props
 }) {
   return (
@@ -87,8 +85,6 @@ function Layout({
                     {children}
                   </Content>
                 </Container>
-
-                <LangSwitch to={langSwitchTo} />
               </>
             </ThemeProvider>
           );
@@ -103,7 +99,6 @@ Layout.propTypes = {
   verticalCenter: PropTypes.bool,
   children: PropTypes.node.isRequired,
   withHeader: PropTypes.bool,
-  langSwitchTo: PropTypes.string,
   withPadding: PropTypes.bool,
 };
 
@@ -111,7 +106,6 @@ Layout.defaultProps = {
   centered: false,
   verticalCenter: false,
   withHeader: true,
-  langSwitchTo: null,
   withPadding: true,
 };
 

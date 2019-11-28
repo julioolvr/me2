@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
+import { Location } from '@reach/router';
 
-import { WithLang } from 'src/components/languageToggle';
+import { WithLang, useLang } from 'src/components/languageToggle';
 import { toSpanish, toEnglish } from 'src/utils/lang';
 
 function LinkWithLang({ lang, to, ...props }) {
@@ -35,3 +36,20 @@ LinkWithLang.defaultProps = {
 };
 
 export default LinkWithLang;
+
+function LinkToOppositeLang(props) {
+  const currentLang = useLang();
+  const otherLang = currentLang === 'es' ? 'en' : 'es';
+
+  return (
+    <Location>
+      {({ location }) => (
+        <LinkWithLang lang={otherLang} to={location.pathname} {...props}>
+          {otherLang === 'es' ? 'español' : 'english'}
+        </LinkWithLang>
+      )}
+    </Location>
+  );
+}
+
+export { LinkToOppositeLang };

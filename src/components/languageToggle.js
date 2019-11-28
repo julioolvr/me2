@@ -9,7 +9,7 @@ class LangProvider extends React.Component {
   state = {
     lang:
       typeof window !== 'undefined'
-        && window.location.pathname.startsWith('/es')
+      && window.location.pathname.startsWith('/es')
         ? 'es'
         : DEFAULT_LANG,
     setLang: (newLang) => {
