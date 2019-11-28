@@ -41,6 +41,8 @@ const ResponsiveMenuContainer = styled.nav`
   flex-direction: column;
 
   background-color: ${({ theme }) => theme.colors.lightBackground};
+  font-size: ${({ theme }) => theme.typography.scale[6]};
+  line-height: 1.5em;
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
     position: initial;
