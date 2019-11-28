@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'gatsby';
+import { Link, StaticQuery, graphql } from 'gatsby';
 import { Location } from '@reach/router';
 
 import { WithLang, useLang } from 'src/components/languageToggle';
@@ -44,9 +44,40 @@ function LinkToOppositeLang(props) {
   return (
     <Location>
       {({ location }) => (
-        <LinkWithLang lang={otherLang} to={location.pathname} {...props}>
-          {otherLang === 'es' ? 'español' : 'english'}
-        </LinkWithLang>
+        <StaticQuery
+          query={graphql`
+            query BlogPosts {
+              allSitePage(filter: { path: { regex: "/^(?:/es)?/b/" } }) {
+                edges {
+                  node {
+                    path
+                  }
+                }
+              }
+            }
+          `}
+          render={(data) => {
+            let to = location.pathname;
+
+            if (to.startsWith('/b') || to.startsWith('/es/b')) {
+              if (
+                !data.allSitePage.edges.some(
+                  page => to !== page.node.path
+                    && page.node.path.replace(/^\/es/, '')
+                      === to.replace(/^\/es/, ''),
+                )
+              ) {
+                to = '/b';
+              }
+            }
+
+            return (
+              <LinkWithLang lang={otherLang} to={to} {...props}>
+                {otherLang === 'es' ? 'español' : 'english'}
+              </LinkWithLang>
+            );
+          }}
+        />
       )}
     </Location>
   );
