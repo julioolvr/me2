@@ -12,6 +12,7 @@ const Time = styled.time`
 const Extra = styled.span`
   display: inline-block;
   font-size: 0.7em;
+  color: ${({ theme }) => theme.colors.lightText};
 
   a {
     color: ${({ theme }) => theme.colors.text};

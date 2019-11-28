@@ -21,6 +21,7 @@ const HeaderContainer = styled.header`
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
     justify-content: flex-end;
-    padding: ${({ theme }) => theme.spacing.scale[4]} ${({ theme }) => theme.spacing.scale[6]};
+    padding: ${({ theme }) => theme.spacing.scale[4]}
+      ${({ theme }) => theme.spacing.scale[6]};
   }
 `;
