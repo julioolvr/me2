@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, createGlobalStyle } from 'styled-components';
 
 import menuIconSrc from 'src/images/menu.svg';
 import LinkWithLang, { LinkToOppositeLang } from 'src/components/link';
@@ -9,12 +9,23 @@ function Menu() {
 
   return (
     <>
-      <MenuButton
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-expanded={menuOpen}
-      />
+      <MenuButton onClick={() => setMenuOpen(true)} aria-expanded={false} />
+
+      <ScrollBlockGlobalStyle block={menuOpen} />
 
       <ResponsiveMenuContainer isOpen={menuOpen}>
+        {menuOpen && (
+          <MenuButton
+            onClick={() => setMenuOpen(false)}
+            aria-expanded
+            css={css`
+              position: absolute;
+              top: ${({ theme }) => theme.spacing.scale[2]};
+              left: ${({ theme }) => theme.spacing.scale[2]};
+            `}
+          />
+        )}
+
         <SectionLink to="/b">blog</SectionLink>
         <SectionLink to="/talks">talks</SectionLink>
         <SectionLink to="/things">things</SectionLink>
@@ -28,7 +39,7 @@ function Menu() {
 export default Menu;
 
 const ResponsiveMenuContainer = styled.nav`
-  position: absolute;
+  position: fixed;
   z-index: 2;
   top: 0;
   bottom: 0;
@@ -73,7 +84,6 @@ const LanguageSwitchLink = styled(LinkToOppositeLang)`
 `;
 
 const MenuButton = styled.button`
-  z-index: 3;
   height: 20px;
   width: 20px;
 
@@ -87,4 +97,17 @@ const MenuButton = styled.button`
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
     display: none;
   }
+`;
+
+const ScrollBlockGlobalStyle = createGlobalStyle`
+  ${({ block }) => block
+    && css`
+      body {
+        overflow: hidden;
+
+        @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
+          overflow: initial;
+        }
+      }
+    `};
 `;
