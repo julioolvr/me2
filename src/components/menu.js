@@ -29,6 +29,10 @@ function Menu() {
         <SectionLink to="/b">blog</SectionLink>
         <SectionLink to="/talks">talks</SectionLink>
         <SectionLink to="/things">things</SectionLink>
+        <ExternalLink href="https://github.com/julioolvr">github</ExternalLink>
+        <ExternalLink href="https://twitter.com/julioolvr">
+          twitter
+        </ExternalLink>
         <hr />
         <LanguageSwitchLink />
       </ResponsiveMenuContainer>
@@ -73,6 +77,10 @@ const linkStyles = css`
     margin: 0 ${({ theme }) => theme.spacing.scale[2]};
     font-size: ${({ theme }) => theme.typography.scale[4]};
   }
+`;
+
+const ExternalLink = styled('a')`
+  ${linkStyles};
 `;
 
 const SectionLink = styled(LinkWithLang)`
