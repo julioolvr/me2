@@ -63,6 +63,7 @@ module.exports = {
         fonts: ['Merriweather:300,300i,900,900i', 'Fira Sans:400'],
       },
     },
+    'gatsby-plugin-use-dark-mode',
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
