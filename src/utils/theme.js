@@ -35,7 +35,7 @@ const darkColors = {
   accentDarker: '#00AA6A',
   accentLight: '#61E0B0',
   accentLighter: '#92EECB',
-  lightBackground: '#3a3a3a',
+  lightBackground: '#111111',
   text: '#fafafa',
   lightText: '#f8f8f8',
 };
