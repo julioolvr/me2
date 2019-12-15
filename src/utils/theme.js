@@ -4,7 +4,7 @@ import 'highlight.js/styles/hybrid.css';
 import { createGlobalStyle } from 'styled-components';
 
 // Color palette https://paletton.com/#uid=53z0u0kmVJ-clUhiaOTrCE6z+vx
-const lightColors = {
+const colors = {
   background: '#fafafa',
   backgroundDarker: '#f0f0f0',
   main: '#458dce',
@@ -18,26 +18,9 @@ const lightColors = {
   accentLight: '#61E0B0',
   accentLighter: '#92EECB',
   lightBackground: '#f1f1f1',
+  darkBackground: '#1d1f21',
   text: '#444444',
   lightText: '#888888',
-};
-
-const darkColors = {
-  background: '#111111',
-  backgroundDarker: '#222222',
-  main: '#458dce',
-  mainDark: '#2676BF',
-  mainDarker: '#0A5AA3',
-  mainLight: '#68A6DD',
-  mainLighter: '#98C4EC',
-  accent: '#3CD299',
-  accentDark: '#1BC484',
-  accentDarker: '#00AA6A',
-  accentLight: '#61E0B0',
-  accentLighter: '#92EECB',
-  lightBackground: '#111111',
-  text: '#fafafa',
-  lightText: '#f8f8f8',
 };
 
 const typography = {
@@ -87,9 +70,10 @@ const spacing = {
 
 spacing.base = spacing.scale[3];
 
-const baseTheme = {
+export const theme = {
   typography,
   spacing,
+  colors,
   breakpoints: {
     small: 640,
     medium: 768,
@@ -101,17 +85,6 @@ const baseTheme = {
     serif: 'Merriweather, serif',
     title: 'Fira Sans',
     text: 'Merriweather',
-  },
-};
-
-export const theme = {
-  light: {
-    ...baseTheme,
-    colors: lightColors,
-  },
-  dark: {
-    ...baseTheme,
-    colors: darkColors,
   },
 };
 

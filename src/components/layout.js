@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { css, ThemeProvider } from 'styled-components';
-import useDarkMode from 'use-dark-mode';
 
 import { theme, GlobalStyle } from 'src/utils/theme';
 
@@ -51,8 +50,6 @@ function Layout({
   withHeader,
   ...props
 }) {
-  const darkMode = useDarkMode(false);
-
   return (
     <LangProvider>
       <StaticQuery
@@ -67,10 +64,9 @@ function Layout({
         `}
         render={(data) => {
           const currentLang = useLang();
-          const themeKey = darkMode.value ? 'dark' : 'light';
 
           return (
-            <ThemeProvider theme={theme[themeKey]}>
+            <ThemeProvider theme={theme}>
               <>
                 <Helmet title={data.site.siteMetadata.title}>
                   <html lang={currentLang} />

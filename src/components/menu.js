@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
-import useDarkMode from 'use-dark-mode';
 
 import menuIconSrc from 'src/images/menu.svg';
-import lightMenuIconSrc from 'src/images/menu-light.svg';
 import LinkWithLang, { LinkToOppositeLang } from 'src/components/link';
 
 function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const darkMode = useDarkMode(false);
-  const themeKey = darkMode.value ? 'dark' : 'light';
 
   return (
     <>
-      <MenuButton
-        onClick={() => setMenuOpen(true)}
-        aria-expanded={false}
-        themeKey={themeKey}
-      />
+      <MenuButton onClick={() => setMenuOpen(true)} aria-expanded={false} />
 
       <ScrollBlockGlobalStyle block={menuOpen} />
 
@@ -26,7 +18,6 @@ function Menu() {
           <MenuButton
             onClick={() => setMenuOpen(false)}
             aria-expanded
-            themeKey={themeKey}
             css={css`
               position: absolute;
               top: ${({ theme }) => theme.spacing.scale[2]};
@@ -56,9 +47,6 @@ function Menu() {
         </ExternalLink>
         <hr />
         <LanguageSwitchLink />
-        <DarkModeToggleButton type="button" onClick={darkMode.toggle}>
-          {darkMode.value ? '☀️' : '🌘'}
-        </DarkModeToggleButton>
       </ResponsiveMenuContainer>
     </>
   );
@@ -119,7 +107,7 @@ const MenuButton = styled.button`
   height: 20px;
   width: 20px;
 
-  background-image: url(${({ themeKey }) => (themeKey === 'light' ? menuIconSrc : lightMenuIconSrc)});
+  background-image: url(${menuIconSrc});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -142,12 +130,4 @@ const ScrollBlockGlobalStyle = createGlobalStyle`
         }
       }
     `};
-`;
-
-const DarkModeToggleButton = styled.button`
-  font-size: ${({ theme }) => theme.typography.scale[6]};
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
 `;
