@@ -26,9 +26,21 @@ function Menu() {
           />
         )}
 
-        <SectionLink to="/b">blog</SectionLink>
-        <SectionLink to="/talks">talks</SectionLink>
-        <SectionLink to="/things">things</SectionLink>
+        <SectionLink to="/b" onCurrentLinkClicked={() => setMenuOpen(false)}>
+          blog
+        </SectionLink>
+        <SectionLink
+          to="/talks"
+          onCurrentLinkClicked={() => setMenuOpen(false)}
+        >
+          talks
+        </SectionLink>
+        <SectionLink
+          to="/things"
+          onCurrentLinkClicked={() => setMenuOpen(false)}
+        >
+          things
+        </SectionLink>
         <ExternalLink href="https://github.com/julioolvr">github</ExternalLink>
         <ExternalLink href="https://twitter.com/julioolvr">
           twitter

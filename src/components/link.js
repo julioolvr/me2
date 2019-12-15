@@ -6,7 +6,9 @@ import { Location } from '@reach/router';
 import { WithLang, useLang } from 'src/components/languageToggle';
 import { toSpanish, toEnglish } from 'src/utils/lang';
 
-function LinkWithLang({ lang, to, ...props }) {
+function LinkWithLang({
+  lang, to, onCurrentLinkClicked, ...props
+}) {
   return (
     <WithLang>
       {(currentLang) => {
@@ -20,7 +22,19 @@ function LinkWithLang({ lang, to, ...props }) {
           }
         }
 
-        return <Link to={newTo} {...props} />;
+        return (
+          <Location>
+            {({ location }) => {
+              const onClickOverride = {};
+
+              if (newTo === location.pathname && onCurrentLinkClicked) {
+                onClickOverride.onClick = onCurrentLinkClicked;
+              }
+
+              return <Link to={newTo} {...onClickOverride} {...props} />;
+            }}
+          </Location>
+        );
       }}
     </WithLang>
   );
@@ -29,10 +43,12 @@ function LinkWithLang({ lang, to, ...props }) {
 LinkWithLang.propTypes = {
   lang: PropTypes.oneOf(['en', 'es']),
   to: PropTypes.string.isRequired,
+  onCurrentLinkClicked: PropTypes.func,
 };
 
 LinkWithLang.defaultProps = {
   lang: null,
+  onCurrentLinkClicked: null,
 };
 
 export default LinkWithLang;
