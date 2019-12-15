@@ -56,6 +56,9 @@ function Menu() {
         </ExternalLink>
         <hr />
         <LanguageSwitchLink />
+        <DarkModeToggleButton type="button" onClick={darkMode.toggle}>
+          {darkMode.value ? '☀️' : '🌘'}
+        </DarkModeToggleButton>
       </ResponsiveMenuContainer>
     </>
   );
@@ -139,4 +142,12 @@ const ScrollBlockGlobalStyle = createGlobalStyle`
         }
       }
     `};
+`;
+
+const DarkModeToggleButton = styled.button`
+  font-size: ${({ theme }) => theme.typography.scale[6]};
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 `;
