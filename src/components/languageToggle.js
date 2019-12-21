@@ -41,32 +41,8 @@ WithLang.propTypes = {
   children: PropTypes.func.isRequired,
 };
 
-function LangToggle({ children }) {
-  return (
-    <Context.Consumer>
-      {({ toggleLang }) => children(toggleLang)}
-    </Context.Consumer>
-  );
-}
-
-LangToggle.propTypes = {
-  children: PropTypes.func.isRequired,
-};
-
-function LangSetter({ children }) {
-  return (
-    <Context.Consumer>{({ setLang }) => children(setLang)}</Context.Consumer>
-  );
-}
-
-LangSetter.propTypes = {
-  children: PropTypes.func.isRequired,
-};
-
 function useLang() {
   return useContext(Context).lang;
 }
 
-export {
-  LangProvider, LangToggle, LangSetter, WithLang, useLang,
-};
+export { LangProvider, WithLang, useLang };
