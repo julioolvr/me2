@@ -1,4 +1,4 @@
-const remarkHighlight = require('remark-highlight.js');
+const rehypeHighlight = require('rehype-highlight');
 
 module.exports = {
   siteMetadata: {
@@ -28,19 +28,19 @@ module.exports = {
     },
     'gatsby-plugin-styled-components',
     {
-      resolve: 'gatsby-mdx',
+      resolve: 'gatsby-plugin-mdx',
       options: {
         gatsbyRemarkPlugins: [
           {
             resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 704,
-              backgroundColor: '#fafafa',
+              backgroundColor: 'transparent',
+              disableBgImageOnAlpha: true,
             },
           },
         ],
-        plugins: ['gatsby-remark-images'],
-        mdPlugins: [remarkHighlight],
+        rehypePlugins: [rehypeHighlight],
         defaultLayouts: {
           posts: require.resolve('./src/templates/blog-post'),
           default: require.resolve('./src/templates/page'),
