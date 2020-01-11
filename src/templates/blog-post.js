@@ -12,22 +12,22 @@ const Title = styled.h1`
 `;
 
 const Post = styled.article`
-  max-width: 40em;
+  max-width: 65ch;
   margin: 0 auto;
 `;
 
 const OtherPost = styled.div`
-  font-size: 0.8em;
+  font-size: ${({ theme }) => theme.typography.scale[1]};
 `;
 
 const Time = styled.time`
   color: ${({ theme }) => theme.colors.lightText};
   display: block;
-  margin-top: 0.5em;
+  margin-top: ${({ theme }) => theme.spacing.scale[1]};
 `;
 
 const Content = styled.div`
-  margin-top: 2em;
+  margin-top: ${({ theme }) => theme.spacing.scale[5]};
 `;
 
 export default function Template({ data, pageContext, children }) {

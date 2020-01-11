@@ -156,7 +156,6 @@ export const GlobalStyle = createGlobalStyle`
   code {
     color: ${({ theme }) => theme.colors.text};
     background-color: ${({ theme }) => theme.colors.backgroundDarker};
-    padding: 4px 6px;
     border-radius: 2px;
   }
 
