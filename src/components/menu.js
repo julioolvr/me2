@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled, { css, createGlobalStyle } from 'styled-components';
 
+import { ThemeContext } from 'src/components/themeToggle';
 import menuIconSrc from 'src/images/menu.svg';
+import menuLightIconSrc from 'src/images/menu-light.svg';
 import LinkWithLang, { LinkToOppositeLang } from 'src/components/link';
 
 function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme: themeKey, toggle: toggleTheme } = useContext(ThemeContext);
 
   return (
-    <>
-      <MenuButton onClick={() => setMenuOpen(true)} aria-expanded={false} />
+    <Container>
+      <MenuButton
+        onClick={() => setMenuOpen(true)}
+        aria-expanded={false}
+        themeKey={themeKey}
+      />
 
       <ScrollBlockGlobalStyle block={menuOpen} />
 
@@ -18,6 +25,7 @@ function Menu() {
           <MenuButton
             onClick={() => setMenuOpen(false)}
             aria-expanded
+            themeKey={themeKey}
             css={css`
               position: absolute;
               top: ${({ theme }) => theme.spacing.scale[2]};
@@ -48,7 +56,14 @@ function Menu() {
         <hr />
         <LanguageSwitchLink />
       </ResponsiveMenuContainer>
-    </>
+
+      <ToggleButton
+        type="button"
+        onClick={() => toggleTheme(themeKey === 'light' ? 'dark' : 'light')}
+      >
+        {themeKey === 'light' ? '🌖' : '☀️'}
+      </ToggleButton>
+    </Container>
   );
 }
 
@@ -104,10 +119,10 @@ const LanguageSwitchLink = styled(LinkToOppositeLang)`
 `;
 
 const MenuButton = styled.button`
-  height: 20px;
+  height: 32px;
   width: 20px;
 
-  background-image: url(${menuIconSrc});
+  background-image: url(${props => (props.themeKey === 'light' ? menuIconSrc : menuLightIconSrc)});
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -116,6 +131,23 @@ const MenuButton = styled.button`
 
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
     display: none;
+  }
+`;
+
+const ToggleButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  font-size: 1.2em;
+  z-index: 3;
+`;
+
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
+    justify-content: flex-end;
   }
 `;
 

@@ -4,7 +4,7 @@ import 'highlight.js/styles/hybrid.css';
 import { createGlobalStyle } from 'styled-components';
 
 // Color palette https://paletton.com/#uid=53z0u0kmVJ-clUhiaOTrCE6z+vx
-const colors = {
+const lightColors = {
   background: '#fafafa',
   backgroundDarker: '#f0f0f0',
   main: '#458dce',
@@ -18,9 +18,26 @@ const colors = {
   accentLight: '#61E0B0',
   accentLighter: '#92EECB',
   lightBackground: '#f1f1f1',
-  darkBackground: '#1d1f21',
   text: '#444444',
   lightText: '#888888',
+};
+
+const darkColors = {
+  background: '#111111',
+  backgroundDarker: '#222222',
+  main: '#458dce',
+  mainDark: '#2676BF',
+  mainDarker: '#0A5AA3',
+  mainLight: '#68A6DD',
+  mainLighter: '#98C4EC',
+  accent: '#3CD299',
+  accentDark: '#1BC484',
+  accentDarker: '#00AA6A',
+  accentLight: '#61E0B0',
+  accentLighter: '#92EECB',
+  lightBackground: '#111111',
+  text: '#fafafa',
+  lightText: '#f8f8f8',
 };
 
 const typography = {
@@ -70,10 +87,9 @@ const spacing = {
 
 spacing.base = spacing.scale[3];
 
-export const theme = {
+const baseTheme = {
   typography,
   spacing,
-  colors,
   breakpoints: {
     small: 640,
     medium: 768,
@@ -88,12 +104,23 @@ export const theme = {
   },
 };
 
+export const theme = {
+  light: {
+    ...baseTheme,
+    colors: lightColors,
+  },
+  dark: {
+    ...baseTheme,
+    colors: darkColors,
+  },
+};
+
 /* eslint-disable no-shadow */
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-size: ${({ theme }) => theme.typography.body};
-    line-height: 1.5em;
+    line-height: 1.5;
     font-family: ${({ theme }) => theme.fonts.serif};
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
@@ -131,13 +158,17 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    line-height: 2em;
+    line-height: 2;
+    margin-bottom: ${({ theme }) => theme.spacing.scale[5]};
+  }
+
+  ul {
     margin-bottom: ${({ theme }) => theme.spacing.scale[5]};
   }
 
   li {
     line-height: ${({ theme }) => theme.spacing.scale[5]};
-    margin-bottom: ${({ theme }) => theme.spacing.scale[3]};
+    margin-bottom: ${({ theme }) => theme.spacing.scale[1]};
   }
 
   a {
@@ -172,6 +203,16 @@ export const GlobalStyle = createGlobalStyle`
     border-radius: 3px;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
     word-break: normal;
+  }
+
+  blockquote {
+    border-left: 3px solid ${({ theme }) => theme.colors.mainDarker};
+    padding-left: ${({ theme }) => theme.spacing.scale[3]};
+    font-style: italic;
+  }
+
+  blockquote > p {
+    line-height: 1.75;
   }
 
   @media only screen and (min-width: 812px) {

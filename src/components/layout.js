@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import styled, { css, ThemeProvider } from 'styled-components';
 
 import { theme, GlobalStyle } from 'src/utils/theme';
+import wrap from 'src/utils/wrap';
+import ThemeToggleProvider, { ThemeContext } from 'src/components/themeToggle';
 
 import Header from 'src/components/header';
 import { LangProvider, useLang } from 'src/components/languageToggle';
@@ -50,6 +52,8 @@ function Layout({
   withHeader,
   ...props
 }) {
+  const { theme: themeKey } = useContext(ThemeContext);
+
   return (
     <LangProvider>
       <StaticQuery
@@ -66,7 +70,7 @@ function Layout({
           const currentLang = useLang();
 
           return (
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme[themeKey || 'light']}>
               <>
                 <Helmet title={data.site.siteMetadata.title}>
                   <html lang={currentLang} />
@@ -109,4 +113,4 @@ Layout.defaultProps = {
   withPadding: true,
 };
 
-export default Layout;
+export default wrap(ThemeToggleProvider)(Layout);
