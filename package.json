@@ -12,7 +12,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "debug": "^4.1.1",
     "firacode": "^1.206.0",
-    "gatsby": "^2.18.16",
+    "gatsby": "^2.22.9",
     "gatsby-image": "^2.2.37",
     "gatsby-plugin-dark-mode": "^1.1.0",
     "gatsby-plugin-favicon": "^3.1.6",
