@@ -6,16 +6,16 @@ import styled from 'styled-components';
 const Time = styled.time`
   display: inline-block;
   font-size: 0.8em;
-  color: ${({ theme }) => theme.colors.lightText};
+  color: var(--metadata-color);
 `;
 
 const Extra = styled.span`
   display: inline-block;
   font-size: 0.7em;
-  color: ${({ theme }) => theme.colors.lightText};
+  color: var(--metadata-color);
 
   a {
-    color: ${({ theme }) => theme.colors.text};
+    color: var(--text-color);
   }
 `;
 
@@ -34,7 +34,7 @@ const PostTitle = styled.div`
 
   a {
     background-image: none;
-    color: ${({ theme }) => theme.colors.text};
+    color: var(--text-color);
   }
 `;
 

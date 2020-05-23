@@ -82,7 +82,7 @@ const ResponsiveMenuContainer = styled.nav`
   justify-content: center;
   flex-direction: column;
 
-  background-color: ${({ theme }) => theme.colors.lightBackground};
+  background-color: var(--menu-background-color);
   font-size: ${({ theme }) => theme.typography.scale[6]};
   line-height: 1.5em;
 
@@ -100,7 +100,7 @@ const ResponsiveMenuContainer = styled.nav`
 
 const linkStyles = css`
   @media only screen and (min-width: ${({ theme }) => theme.breakpoints.medium}px) {
-    color: ${({ theme }) => theme.colors.text};
+    color: var(--text-color);
     margin: 0 ${({ theme }) => theme.spacing.scale[2]};
     font-size: ${({ theme }) => theme.typography.scale[4]};
   }

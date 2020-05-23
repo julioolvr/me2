@@ -13,7 +13,7 @@ const Content = styled.div`
   max-width: 40em;
   margin-left: ${({ theme }) => theme.spacing.scale[4]};
   padding-left: ${({ theme }) => theme.spacing.scale[3]};
-  border-left: 2px solid ${({ theme }) => theme.colors.main};
+  border-left: 2px solid var(--link-color);
 `;
 
 const Name = styled.h1`

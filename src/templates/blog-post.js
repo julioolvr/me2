@@ -21,7 +21,7 @@ const OtherPost = styled.div`
 `;
 
 const Time = styled.time`
-  color: ${({ theme }) => theme.colors.lightText};
+  color: var(--metadata-color);
   display: block;
   margin-top: ${({ theme }) => theme.spacing.scale[1]};
 `;

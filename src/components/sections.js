@@ -17,7 +17,7 @@ const Pages = styled.ul`
   max-width: ${({ theme }) => theme.spacing.scale[12]};
 
   a {
-    color: ${({ theme }) => theme.colors.text};
+    color: var(--text-color);
   }
 `;
 

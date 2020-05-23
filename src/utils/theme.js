@@ -118,12 +118,34 @@ export const theme = {
 /* eslint-disable no-shadow */
 export const GlobalStyle = createGlobalStyle`
   body {
+    --background-color: ${theme.light.colors.background};
+    --text-color: ${theme.light.colors.text};
+    --link-color: ${theme.light.colors.main};
+    --code-color: ${theme.light.colors.text};
+    --code-background-color: ${theme.light.colors.backgroundDarker};
+    --quote-border-color: ${theme.light.colors.mainDarker};
+    --menu-background-color: ${theme.light.colors.lightBackground};
+    --metadata-color: ${theme.light.colors.lightText};
+  }
+
+  body.dark {
+    --background-color: ${theme.dark.colors.background};
+    --text-color: ${theme.dark.colors.text};
+    --link-color: ${theme.dark.colors.main};
+    --code-color: ${theme.dark.colors.text};
+    --code-background-color: ${theme.dark.colors.backgroundDarker};
+    --quote-border-color: ${theme.dark.colors.mainDarker};
+    --menu-background-color: ${theme.dark.colors.lightBackground};
+    --metadata-color: ${theme.dark.colors.lightText};
+  }
+
+  body {
     margin: 0;
     font-size: ${({ theme }) => theme.typography.body};
     line-height: 1.5;
     font-family: ${({ theme }) => theme.fonts.serif};
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
+    background-color: var(--background-color);
+    color: var(--text-color);
     word-break: break-word;
   }
 
@@ -172,7 +194,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${({ theme }) => theme.colors.main};
+    color: var(--link-color);
     text-decoration: none;
   }
 
@@ -185,13 +207,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   code {
-    color: ${({ theme }) => theme.colors.text};
-    background-color: ${({ theme }) => theme.colors.backgroundDarker};
+    color: var(--code-color);
+    background-color: var(--code-background-color);
     border-radius: 2px;
   }
 
   a code {
-    color: ${({ theme }) => theme.colors.main};
+    color: var(--link-color);
   }
 
   code[class*='language-'],
@@ -206,7 +228,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   blockquote {
-    border-left: 3px solid ${({ theme }) => theme.colors.mainDarker};
+    border-left: 3px solid var(--quote-border-color);
     padding-left: ${({ theme }) => theme.spacing.scale[3]};
     font-style: italic;
   }
